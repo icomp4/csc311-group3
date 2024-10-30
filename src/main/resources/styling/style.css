@@ -29,6 +29,9 @@
     -fx-background-color: #1a6c2e;
     -fx-cursor: hand;
 }
+#registerButton{
+    -fx-padding: 5px;
+}
 #registerButton:hover{
     -fx-cursor: hand;
 }
