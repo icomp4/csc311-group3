@@ -8,19 +8,14 @@ public class DashboardViewController {
 
     @FXML
     private Text dashboardLink;
-
     @FXML
     private Text analyticsLink;
-
     @FXML
     private Text addExpenseLink;
-
     @FXML
     private Text addDepositLink;
-
     @FXML
     private Text settingsLink;
-
 
     @FXML
     void dashboardLinkClicked(ActionEvent event) {
@@ -28,28 +23,24 @@ public class DashboardViewController {
         // TODO: Implement dashboard functionality to navigate to dashboard page
 
     }
-
     @FXML
     void analyticsLinkClicked(ActionEvent event) {
 
         // TODO: Implement functionality to navigate to analytics page
 
     }
-
     @FXML
     void addExpenseLinkClicked(ActionEvent event) {
 
         // TODO: Implement functionality to navigate to addExpense page
 
     }
-
     @FXML
     void addDepositLinkClicked(ActionEvent event) {
 
         // TODO: Implement functionality to navigate to addDeposit page
 
     }
-
     @FXML
     void settingsLinkClicked(ActionEvent event) {
 
