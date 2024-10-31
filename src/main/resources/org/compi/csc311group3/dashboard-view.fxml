@@ -24,7 +24,7 @@
                <children>
                   <VBox layoutX="56.0" layoutY="45.0" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" wrappingWidth="117.56099700927734">
+                        <Text fx:id="dashboardLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" wrappingWidth="117.56099700927734">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -32,7 +32,7 @@
                               <Insets top="7.0" />
                            </VBox.margin>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Analytics" wrappingWidth="117.56099700927734">
+                        <Text fx:id="analyticsLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Analytics" wrappingWidth="117.56099700927734">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -40,7 +40,7 @@
                               <Insets top="7.0" />
                            </VBox.margin>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Expense" wrappingWidth="117.56099700927734">
+                        <Text fx:id="addExpenseLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Expense" wrappingWidth="117.56099700927734">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -48,7 +48,7 @@
                               <Insets top="7.0" />
                            </VBox.margin>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Deposit" wrappingWidth="117.56099700927734">
+                        <Text fx:id="addDepositLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Deposit" wrappingWidth="117.56099700927734">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -56,7 +56,7 @@
                               <Insets top="7.0" />
                            </VBox.margin>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="117.56099700927734">
+                        <Text fx:id="settingsLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="117.56099700927734">
                            <font>
                               <Font size="18.0" />
                            </font>
