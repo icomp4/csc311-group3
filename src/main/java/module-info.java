@@ -3,6 +3,7 @@ module org.compi.csc311group3 {
     requires javafx.fxml;
     requires java.desktop;
     requires jdk.jfr;
+    requires commons.validator;
 
 
     opens org.compi.csc311group3 to javafx.fxml;
