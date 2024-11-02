@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
 public class LoginController {
 
     @FXML
@@ -31,7 +32,45 @@ public class LoginController {
         pwTextField.setId("pwTextField");
         usernameTextField.setId("usernameTextField");
         registerButton.setId("registerButton");
+        
+        // Disable the login button, and attach our validation methods
+        loginButton.setDisable(true);
+
+        // Add listeners to trigger validation
+        usernameTextField.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+        pwTextField.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
     }
+
+    /**
+     * Validates the inputs of all fields, and updates the login button accordingly
+     */
+    private void validateInputs() {
+        boolean isUsernameValid = isUsernameValid();
+        boolean isPasswordValid = isPasswordValid();
+
+        // Enable login button only if both fields are valid
+        loginButton.setDisable(!(isUsernameValid && isPasswordValid));
+    }
+
+    /**
+     * Validates the username field
+     * @return true if the username is not empty and has at least 5 characters
+     */
+    private boolean isUsernameValid() {
+        String username = usernameTextField.getText();
+        return username != null && !username.trim().isEmpty() && username.length() >= 5;
+    }
+
+    /**
+     * Validates the password field
+     * @return true if the password is not empty and has at least 5 characters
+     */
+    private boolean isPasswordValid() {
+        String password = pwTextField.getText();
+
+        return password != null && !password.trim().isEmpty() && password.length() >= 5;
+    }
+
     @FXML
     void LoginClicked(ActionEvent event) {
 
