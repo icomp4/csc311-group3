@@ -7,4 +7,6 @@ module org.compi.csc311group3 {
 
     opens org.compi.csc311group3 to javafx.fxml;
     exports org.compi.csc311group3;
+    exports org.compi.csc311group3.view.controllers;
+    opens org.compi.csc311group3.view.controllers to javafx.fxml;
 }
