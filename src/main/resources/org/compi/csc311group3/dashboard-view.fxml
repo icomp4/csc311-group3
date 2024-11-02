@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="560.0" prefWidth="850.0" stylesheets="@dashboardStyles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.DashboardViewController">
+   <children>
+      <VBox fx:id="leftSection" layoutX="-2.0" prefHeight="560.0" prefWidth="210.0">
+         <children>
+            <Pane prefHeight="229.0" prefWidth="210.0">
+               <VBox.margin>
+                  <Insets top="150.0" />
+               </VBox.margin>
+               <children>
+                  <VBox layoutX="56.0" layoutY="45.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fx:id="dashboardLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" wrappingWidth="117.56099700927734">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="7.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="analyticsLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Analytics" wrappingWidth="117.56099700927734">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="7.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="addExpenseLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Expense" wrappingWidth="117.56099700927734">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="7.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="addDepositLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Deposit" wrappingWidth="117.56099700927734">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="7.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="settingsLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="117.56099700927734">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="7.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <Text fill="WHITE" layoutX="21.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage" wrappingWidth="49.737998962402344" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="31.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@dashboardIcons/dashboard.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="31.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@dashboardIcons/analytics.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="31.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@dashboardIcons/addExpense.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="31.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@dashboardIcons/addDeposit.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="31.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@dashboardIcons/settings.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children></VBox>
+      <HBox prefHeight="34.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="33.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="8.0" top="26.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@dashboardIcons/leaf.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="logoText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Finance App">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="30.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+      </HBox>
+      <Pane fx:id="midSection" layoutX="187.0" prefHeight="560.0" prefWidth="662.0">
+         <children>
+            <Pane fx:id="balancePane" layoutX="52.0" layoutY="66.0" prefHeight="110.0" prefWidth="177.0">
+               <children>
+                  <Text layoutX="16.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$3,000">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="17.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Balance" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="15.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@dashboardIcons/bank.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="expensePane" layoutX="243.0" layoutY="66.0" prefHeight="110.0" prefWidth="177.0">
+               <children>
+                  <Text layoutX="15.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$100">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="16.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expenses" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@dashboardIcons/dollarSign.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="budgetPane" layoutX="52.0" layoutY="189.0" prefHeight="110.0" prefWidth="177.0">
+               <children>
+                  <Text layoutX="16.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$2,000">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="17.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monthly Budget" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="15.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@dashboardIcons/moneyBag.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="savingsPane" layoutX="243.0" layoutY="189.0" prefHeight="110.0" prefWidth="177.0">
+               <children>
+                  <Text layoutX="15.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$1,000">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="16.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savings" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@dashboardIcons/savings.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="recentExpensesPane" layoutX="434.0" layoutY="66.0" prefHeight="443.0" prefWidth="177.0">
+               <children>
+                  <Text layoutX="16.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recent Expenses">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutX="10.0" layoutY="68.0" prefHeight="29.0" prefWidth="157.0" styleClass="expenses">
+                     <children>
+                        <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Groceries $50" wrappingWidth="98.2800064086914" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="106.0" prefHeight="29.0" prefWidth="157.0" styleClass="expenses">
+                     <children>
+                        <Text layoutX="11.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transportation $75" wrappingWidth="135.2800064086914" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="145.0" prefHeight="29.0" prefWidth="157.0" styleClass="expenses">
+                     <children>
+                        <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Bill $60" wrappingWidth="135.2800064086914" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="183.0" prefHeight="29.0" prefWidth="157.0" styleClass="expenses">
+                     <children>
+                        <Text layoutX="12.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subscriptions $50" wrappingWidth="127.9530029296875" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Text layoutX="52.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+            <BarChart fx:id="barChart" layoutX="51.0" layoutY="308.0" prefHeight="200.0" prefWidth="370.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children></Pane>
+   </children>
+</AnchorPane>
