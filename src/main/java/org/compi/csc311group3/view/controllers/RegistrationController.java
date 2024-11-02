@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.apache.commons.validator.*;
 
 import java.io.IOException;
 
@@ -41,9 +40,8 @@ public class RegistrationController {
     }
 
     private boolean isEmailValid() {
-
-        // Use an instance of the EmailValidator class to validate the email address from apache commons validator
-        return EmailValidator.getInstance().isValid(regEmail.getText());
+        String email = regEmail.getText();
+        return email != null && !email.trim().isEmpty() && email.contains("@") && email.contains(".");
     }
 
     private boolean isUsernameValid() {
