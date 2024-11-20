@@ -3,7 +3,6 @@ module org.compi.csc311group3 {
     requires javafx.fxml;
     requires java.desktop;
     requires jdk.jfr;
-    requires java.sql;
 
 
     opens org.compi.csc311group3 to javafx.fxml;
