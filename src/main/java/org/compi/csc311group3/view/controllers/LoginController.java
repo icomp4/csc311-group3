@@ -7,8 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.compi.csc311group3.HelloApplication;
+import org.compi.csc311group3.service.UserService;
 
 import java.io.IOException;
+
+import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 
 
 public class LoginController {
@@ -24,6 +28,8 @@ public class LoginController {
 
     @FXML
     private TextField usernameTextField;
+
+    UserService userService = new UserService();
 
     public void initialize() {
 
@@ -72,10 +78,15 @@ public class LoginController {
     }
 
     @FXML
-    void LoginClicked(ActionEvent event) {
-
-        // TODO: Implement login functionality after implementing the database
-
+    void LoginClicked(ActionEvent event) throws IOException {
+        if(isUsernameValid() && isPasswordValid()) {
+            boolean loggedIn = userService.Login(usernameTextField.getText(), pwTextField.getText());
+            if(loggedIn){
+                ChangeScreen("dashboard-view.fxml", 850, 560, loginButton);
+            } else {
+                System.out.println("Invalid credentials");
+            }
+        }
     }
 
     @FXML
