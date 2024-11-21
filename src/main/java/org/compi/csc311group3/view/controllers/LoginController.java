@@ -83,7 +83,6 @@ public class LoginController {
             boolean loggedIn = userService.Login(usernameTextField.getText(), pwTextField.getText());
             if(loggedIn){
                 ChangeScreen("dashboard-view.fxml", 850, 560, loginButton);
-                userService.initializeDatabase();
             } else {
                 System.out.println("Invalid credentials");
             }

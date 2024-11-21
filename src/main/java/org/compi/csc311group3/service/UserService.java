@@ -89,10 +89,6 @@ public class UserService {
         }
     }
 
-    // Initializes the database and the expenses table
-    public void initializeDatabase() {
-        dbConnection.initializeExpenseTable();
-    }
     /**
      * Add an expense for the current user.
      * @param amount the amount spent
