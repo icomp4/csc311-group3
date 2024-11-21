@@ -7,10 +7,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styling/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.view.controllers.RegistrationController">
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.view.controllers.RegistrationController">
    <children>
-      <VBox alignment="BOTTOM_CENTER" layoutX="111.0" layoutY="94.0" prefHeight="246.0" prefWidth="378.0">
+      <VBox alignment="CENTER" layoutX="111.0" layoutY="94.0" prefHeight="246.0" prefWidth="378.0" spacing="10.0">
          <children>
             <TextField fx:id="regUsername" promptText="Username" />
             <TextField fx:id="regPassword" promptText="Password" />

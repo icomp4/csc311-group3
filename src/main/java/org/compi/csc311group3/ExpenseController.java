@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import jdk.jfr.Category;
+import org.compi.csc311group3.service.UserService;
+import org.compi.csc311group3.view.controllers.LoginController;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -53,6 +55,7 @@ public class ExpenseController {
 
     private ObservableList<Expense> expenses;
     private ObservableList<String> categories;
+    private UserService userService = UserService.getInstance();
 
     public void initialize() {
         expenses = FXCollections.observableArrayList();
@@ -77,6 +80,8 @@ public class ExpenseController {
         LocalDateTime dateTime = dateTimeField.getValue().atStartOfDay();
         Expense expense = new Expense(description, category, dateTime, amount);
         expenses.add(expense);
+        userService.addExpense(expense.getAmount(),expense.getCategory(),expense.getDescription());
+        userService.printAllExpenses();
         clearFields();
     }
 

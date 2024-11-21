@@ -35,3 +35,10 @@
 #registerButton:hover{
     -fx-cursor: hand;
 }
+#registerbttn{
+    -fx-background-color: #228131;
+    -fx-border: none;
+    -fx-background-radius: 0px;
+    -fx-padding: 5px;
+    -fx-text-fill: #fff;
+}

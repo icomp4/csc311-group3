@@ -29,7 +29,7 @@ public class LoginController {
     @FXML
     private TextField usernameTextField;
 
-    UserService userService = new UserService();
+    private UserService userService = UserService.getInstance();
 
     public void initialize() {
 
@@ -83,6 +83,7 @@ public class LoginController {
             boolean loggedIn = userService.Login(usernameTextField.getText(), pwTextField.getText());
             if(loggedIn){
                 ChangeScreen("dashboard-view.fxml", 850, 560, loginButton);
+                userService.initializeDatabase();
             } else {
                 System.out.println("Invalid credentials");
             }
@@ -90,16 +91,8 @@ public class LoginController {
     }
 
     @FXML
-    void RegisterClicked(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/compi/csc311group3/registration-view.fxml"));
-            Scene registrationScene = new Scene(fxmlLoader.load(), 600, 400);
-            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();//dont rly understand this line
-            stage.setScene(registrationScene);
-            stage.setTitle("Registration");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void RegisterClicked(ActionEvent event) throws IOException {
+        ChangeScreen("registration-view.fxml", 600, 400, registerButton);
     }
 
     // TODO: Implement opening the registration page once it's added
