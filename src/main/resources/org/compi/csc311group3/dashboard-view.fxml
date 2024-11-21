@@ -177,7 +177,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="recentExpensesPane" layoutX="434.0" layoutY="66.0" prefHeight="443.0" prefWidth="177.0">
+            <Pane fx:id="recentExpensesPane" layoutX="434.0" layoutY="66.0" prefHeight="472.0" prefWidth="177.0">
                <children>
                   <Text layoutX="16.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recent Expenses">
                      <font>
@@ -211,12 +211,12 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Text>
-            <BarChart fx:id="barChart" layoutX="51.0" layoutY="308.0" prefHeight="200.0" prefWidth="370.0">
+            <BarChart fx:id="barChart" horizontalGridLinesVisible="false" layoutX="51.0" layoutY="308.0" prefHeight="230.0" prefWidth="368.0" title="Expenses" verticalGridLinesVisible="false">
               <xAxis>
-                <CategoryAxis side="BOTTOM" />
+                <CategoryAxis label="Days" prefWidth="472.0" tickLabelGap="0.0" tickLength="2.0" fx:id="xAxis" />
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" />
+                <NumberAxis fx:id="yAxis" label="Dollars" minorTickCount="0" minorTickVisible="false" prefHeight="133.0" prefWidth="38.0" tickLength="1.0" />
               </yAxis>
             </BarChart>
          </children></Pane>

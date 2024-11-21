@@ -8,10 +8,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    @Override
+    /*@Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        stage.setTitle("Finance Application");
+        stage.setScene(scene);
+        stage.show();
+    }*/
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard-view.fxml")); //show dashboard page for testing purposes
+        Scene scene = new Scene(fxmlLoader.load(), 850, 560);
         stage.setTitle("Finance Application");
         stage.setScene(scene);
         stage.show();
