@@ -134,7 +134,7 @@
             </Pane>
             <Pane fx:id="expensePane" layoutX="243.0" layoutY="66.0" prefHeight="110.0" prefWidth="177.0">
                <children>
-                  <Text fx:id="ExpensesText" layoutX="15.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$100">
+                  <Text fx:id="expensesText" layoutX="15.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$100">
                      <font>
                         <Font size="23.0" />
                      </font>

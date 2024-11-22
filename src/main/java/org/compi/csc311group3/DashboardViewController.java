@@ -26,6 +26,15 @@ public class DashboardViewController implements Runnable{
 
 
     @FXML
+    private Text totalBalanceText;
+    @FXML
+    private Text expensesText;
+    @FXML
+    private Text monthlyBudgetText;
+    @FXML
+    private Text savingsText;
+
+    @FXML
     private Text dashboardLink;
     @FXML
     private Text analyticsLink;
@@ -41,18 +50,26 @@ public class DashboardViewController implements Runnable{
     @FXML
     private BarChart<String, Number> barChart;
 
-    @FXML
-    private CategoryAxis xAxis;
-
-    @FXML
-    private NumberAxis yAxis;
-
 
 
     public void initialize() {
 
+        //assign data from DB to these variables
+        double balance = 3000;
+        double expenses = 100;
+        double monthlyBudget = 2000;
+        double savings = 1000;
 
-        barChart.legendVisibleProperty().setValue(false);
+        //sets text to assigned values
+        totalBalanceText.setText("$" + balance);
+        expensesText.setText("$" + expenses);
+        monthlyBudgetText.setText("$" + monthlyBudget);
+        savingsText.setText("$" + savings);
+
+
+        /***** Bar chart code - start *****/
+
+        barChart.legendVisibleProperty().setValue(false); //hides legend on bar chart
 
         XYChart.Series set1 = new XYChart.Series<>();
 
@@ -65,18 +82,20 @@ public class DashboardViewController implements Runnable{
         double fridayExpense = 8.0;
         double saturdayExpense = 3.0;
 
-        set1.getData().add(new XYChart.Data( "Sun", sundayExpense ));
-        set1.getData().add(new XYChart.Data( "Mon", mondayExpense ));
-        set1.getData().add(new XYChart.Data( "Tue", tuesdayExpense));
-        set1.getData().add(new XYChart.Data( "Wed", wednesdayExpense));
-        set1.getData().add(new XYChart.Data( "Thr", thursdayExpense));
-        set1.getData().add(new XYChart.Data( "Fri", fridayExpense));
-        set1.getData().add(new XYChart.Data( "Sat", saturdayExpense));
+        //data for each day of the week
+        set1.getData().add(new XYChart.Data( "Sun", sundayExpense ));//new bar
+        set1.getData().add(new XYChart.Data( "Mon", mondayExpense ));//new bar
+        set1.getData().add(new XYChart.Data( "Tue", tuesdayExpense));//new bar
+        set1.getData().add(new XYChart.Data( "Wed", wednesdayExpense));//new bar
+        set1.getData().add(new XYChart.Data( "Thr", thursdayExpense));//new bar
+        set1.getData().add(new XYChart.Data( "Fri", fridayExpense));//new bar
+        set1.getData().add(new XYChart.Data( "Sat", saturdayExpense));//new bar
 
 
+        barChart.getData().addAll(set1);//adds data to barChart
 
+        /***** Bar chart code - end *****/
 
-        barChart.getData().addAll(set1);
     }
 
 
@@ -126,7 +145,6 @@ public class DashboardViewController implements Runnable{
         if (printerJob != null && printerJob.showPrintDialog(stage1)) { //
 
             boolean success = printerJob.printPage(barChart); //prints the chart
-
 
             if (success) { //runs if export is successfully
                 printerJob.endJob(); //closes the printer job
