@@ -119,7 +119,7 @@
          <children>
             <Pane fx:id="balancePane" layoutX="52.0" layoutY="66.0" prefHeight="110.0" prefWidth="177.0">
                <children>
-                  <Text layoutX="16.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$3,000">
+                  <Text fx:id="totalBalanceText" layoutX="16.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$3,000">
                      <font>
                         <Font size="23.0" />
                      </font>
@@ -134,7 +134,7 @@
             </Pane>
             <Pane fx:id="expensePane" layoutX="243.0" layoutY="66.0" prefHeight="110.0" prefWidth="177.0">
                <children>
-                  <Text layoutX="15.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$100">
+                  <Text fx:id="ExpensesText" layoutX="15.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$100">
                      <font>
                         <Font size="23.0" />
                      </font>
@@ -149,7 +149,7 @@
             </Pane>
             <Pane fx:id="budgetPane" layoutX="52.0" layoutY="189.0" prefHeight="110.0" prefWidth="177.0">
                <children>
-                  <Text layoutX="16.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$2,000">
+                  <Text fx:id="monthlyBudgetText" layoutX="16.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$2,000">
                      <font>
                         <Font size="23.0" />
                      </font>
@@ -164,7 +164,7 @@
             </Pane>
             <Pane fx:id="savingsPane" layoutX="243.0" layoutY="189.0" prefHeight="110.0" prefWidth="177.0">
                <children>
-                  <Text layoutX="15.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$1,000">
+                  <Text fx:id="savingsText" layoutX="15.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$1,000">
                      <font>
                         <Font size="23.0" />
                      </font>
@@ -219,6 +219,11 @@
                 <NumberAxis fx:id="yAxis" label="Dollars" minorTickCount="0" minorTickVisible="false" prefHeight="133.0" prefWidth="38.0" tickLength="1.0" />
               </yAxis>
             </BarChart>
+            <ImageView fitHeight="24.0" fitWidth="48.0" layoutX="387.0" layoutY="312.0" onMouseClicked="#startExport" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@dashboardIcons/download.png" />
+               </image>
+            </ImageView>
          </children></Pane>
    </children>
 </AnchorPane>

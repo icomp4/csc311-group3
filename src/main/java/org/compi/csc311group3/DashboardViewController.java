@@ -2,16 +2,27 @@ package org.compi.csc311group3;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.print.PrinterJob;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.image.WritableImage;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 
-public class DashboardViewController {
+import javax.swing.*;
+
+
+
+public class DashboardViewController implements Runnable{
 
 
     @FXML
@@ -97,6 +108,50 @@ public class DashboardViewController {
     void settingsLinkClicked(ActionEvent event) {
 
         // TODO: Implement functionality to navigate to settings page
+    }
+
+
+    //overrides the run method from the Runnable interface
+    @Override
+    public void run() {
+        exportBarChartToPDF(); //calls method to export bar chart
+    }
+
+    //exports bar chart
+    public void exportBarChartToPDF() {
+        Stage stage1 = getStage(this.barChart); //stage where bar chart it located
+
+        PrinterJob printerJob = PrinterJob.createPrinterJob(); //create a printer job
+
+        if (printerJob != null && printerJob.showPrintDialog(stage1)) { //
+
+            boolean success = printerJob.printPage(barChart); //prints the chart
+
+
+            if (success) { //runs if export is successfully
+                printerJob.endJob(); //closes the printer job
+                System.out.println("export successful");
+            } else {
+                System.out.println("export failed");
+            }
+        } else {
+            System.out.println("chart could not be exported");
+        }
+    } //end exportBarChartToPDF
+
+
+    //finds the stage where barChart is located
+    public static Stage getStage(BarChart<?, ?> barChart) {
+        if (barChart.getScene() != null && barChart.getScene().getWindow() instanceof Stage) {
+            return (Stage) barChart.getScene().getWindow();
+        }
+        return null; //returns null if the bar chart is not on a stage
+    }
+
+    //method that creates and starts the thread
+    public void startExport(){
+        Thread myThread = new Thread(this);
+        myThread.start();
     }
 
 
