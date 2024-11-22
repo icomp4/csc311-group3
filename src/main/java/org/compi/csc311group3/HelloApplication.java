@@ -17,6 +17,17 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    /*
+    //used for dashboard testing so that dashboard page shows upon running the application
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard-view.fxml")); //show dashboard page for testing purposes
+        Scene scene = new Scene(fxmlLoader.load(), 850, 560);
+        stage.setTitle("Finance Application");
+        stage.setScene(scene);
+        stage.show();
+    }*/
+
     /**
      * This method is used to change the screen
      * @param fxml the fxml file to load
