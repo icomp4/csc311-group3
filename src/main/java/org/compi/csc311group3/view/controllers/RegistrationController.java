@@ -23,7 +23,7 @@ public class RegistrationController {
     @FXML
     private Button registerbttn;
 
-    private final UserService userService = new UserService();
+    private UserService userService = UserService.getInstance();
 
     public void initialize() {
         // Disable the login button, and attach our validation methods
