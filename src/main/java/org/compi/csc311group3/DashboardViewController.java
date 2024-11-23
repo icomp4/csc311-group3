@@ -4,22 +4,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.image.WritableImage;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
 
+import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 
 
 public class DashboardViewController implements Runnable{
@@ -35,15 +27,15 @@ public class DashboardViewController implements Runnable{
     private Text savingsText;
 
     @FXML
-    private Text dashboardLink;
+    private Button dashboardLink;
     @FXML
-    private Text analyticsLink;
+    private Button analyticsLink;
     @FXML
-    private Text addExpenseLink;
+    private Button addExpenseLink;
     @FXML
-    private Text addDepositLink;
+    private Button addDepositLink;
     @FXML
-    private Text settingsLink;
+    private Button settingsLink;
 
 
     //bar chart code
@@ -102,8 +94,6 @@ public class DashboardViewController implements Runnable{
     @FXML
     void dashboardLinkClicked(ActionEvent event) {
 
-        // TODO: Implement dashboard functionality to navigate to dashboard page
-
     }
     @FXML
     void analyticsLinkClicked(ActionEvent event) {
@@ -112,10 +102,8 @@ public class DashboardViewController implements Runnable{
 
     }
     @FXML
-    void addExpenseLinkClicked(ActionEvent event) {
-
-        // TODO: Implement functionality to navigate to addExpense page
-
+    void addExpenseLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("Expense.fxml", 850, 560, addExpenseLink);
     }
     @FXML
     void addDepositLinkClicked(ActionEvent event) {

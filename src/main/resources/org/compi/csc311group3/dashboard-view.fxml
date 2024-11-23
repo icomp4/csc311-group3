@@ -4,6 +4,7 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="560.0" prefWidth="850.0" stylesheets="@dashboardStyles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.DashboardViewController">
+<AnchorPane prefHeight="560.0" prefWidth="850.0" stylesheets="@dashboardStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.DashboardViewController">
    <children>
       <VBox fx:id="leftSection" layoutX="-2.0" prefHeight="560.0" prefWidth="210.0">
          <children>
@@ -22,48 +23,33 @@
                   <Insets top="150.0" />
                </VBox.margin>
                <children>
-                  <VBox layoutX="56.0" layoutY="45.0" prefHeight="200.0" prefWidth="100.0">
+                  <VBox layoutX="51.0" layoutY="49.0" prefHeight="200.0" prefWidth="100.0" spacing="2.0">
                      <children>
-                        <Text fx:id="dashboardLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" wrappingWidth="117.56099700927734">
+                        <Button fx:id="dashboardLink" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#dashboardLinkClicked" style="-fx-background-color: transparent;" text="Dashboard" textFill="WHITE">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="14.0" />
                            </font>
-                           <VBox.margin>
-                              <Insets top="7.0" />
-                           </VBox.margin>
-                        </Text>
-                        <Text fx:id="analyticsLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Analytics" wrappingWidth="117.56099700927734">
+                        </Button>
+                        <Button fx:id="analyticsLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#analyticsLinkClicked" style="-fx-background-color: transparent;" text="Analytics" textFill="WHITE">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="14.0" />
                            </font>
-                           <VBox.margin>
-                              <Insets top="7.0" />
-                           </VBox.margin>
-                        </Text>
-                        <Text fx:id="addExpenseLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Expense" wrappingWidth="117.56099700927734">
+                        </Button>
+                        <Button fx:id="addExpenseLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" onAction="#addExpenseLinkClicked" style="-fx-background-color: transparent;" text="Add Expense" textFill="WHITE">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="14.0" />
                            </font>
-                           <VBox.margin>
-                              <Insets top="7.0" />
-                           </VBox.margin>
-                        </Text>
-                        <Text fx:id="addDepositLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Deposit" wrappingWidth="117.56099700927734">
+                        </Button>
+                        <Button fx:id="addDepositLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#addDepositLinkClicked" style="-fx-background-color: transparent;" text="Add Deposit" textFill="WHITE">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="14.0" />
                            </font>
-                           <VBox.margin>
-                              <Insets top="7.0" />
-                           </VBox.margin>
-                        </Text>
-                        <Text fx:id="settingsLink" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="117.56099700927734">
+                        </Button>
+                        <Button fx:id="settingsLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#settingsLinkClicked" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="14.0" />
                            </font>
-                           <VBox.margin>
-                              <Insets top="7.0" />
-                           </VBox.margin>
-                        </Text>
+                        </Button>
                      </children>
                   </VBox>
                   <Text fill="WHITE" layoutX="21.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage" wrappingWidth="49.737998962402344" />
