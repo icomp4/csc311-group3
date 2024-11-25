@@ -3,17 +3,30 @@ package org.compi.csc311group3;
 import java.time.LocalDateTime;
 
 public class Expense {
+    private int id;
+    private LocalDateTime date_time;
     private String description;
     private String category;
-    private LocalDateTime dateTime;
     private double amount;
 
-    public Expense(String description, String category, LocalDateTime dateTime, double amount) {
+    public Expense(LocalDateTime date_time, String description, String category, double amount) {
+        this.date_time = date_time;
         this.description = description;
         this.category = category;
-        this.dateTime = dateTime;
+        this.amount = amount;
+    }
+
+    public Expense(int id, LocalDateTime date_time, String description, String category, double amount) {
+        this.id = id;
+        this.date_time = date_time;
+        this.description = description;
+        this.category = category;
         this.amount = amount;
         }
+
+        public int getId(){return id;}
+
+        public void setId(int id){this.id = id;}
 
         public String getDescription() {return description;}
 
@@ -29,12 +42,12 @@ public class Expense {
             this.category = category;
         }
 
-        public LocalDateTime getDateTime() {
-            return dateTime;
+        public LocalDateTime getDate_time() {
+            return date_time;
         }
 
-        public void setDateTime(LocalDateTime dateTime) {
-            this.dateTime = dateTime;
+        public void setDate_time(LocalDateTime date_time) {
+            this.date_time = date_time;
         }
 
         public double getAmount() {
@@ -45,6 +58,6 @@ public class Expense {
 
         @Override
         public String toString() {
-            return String.format("%s: %s, %s, %.2f", description, category, dateTime, amount);
+            return String.format("%s: %s, %s, %.2f", id, date_time, description, category, amount);
         }
 }
