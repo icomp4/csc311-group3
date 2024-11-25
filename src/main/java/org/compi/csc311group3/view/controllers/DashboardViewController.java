@@ -1,4 +1,4 @@
-package org.compi.csc311group3;
+package org.compi.csc311group3.view.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
