@@ -108,18 +108,29 @@
                     <Font name="System Bold" size="20.0" />
                 </font>
             </Text>
-            <Text layoutX="52.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Theme">
+            <Text layoutX="52.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Theme">
                <font>
-                  <Font size="15.0" />
+                  <Font size="14.0" />
                </font>
             </Text>
-            <Circle fx:id="theme1" fill="WHITE" layoutX="85.0" layoutY="143.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-            <Arc layoutX="85.0" layoutY="143.0" length="180.0" radiusX="30.0" radiusY="30.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <Circle fx:id="theme2" layoutX="164.0" layoutY="142.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-            <Arc fill="WHITE" layoutX="164.0" layoutY="142.0" length="180.0" radiusX="30.0" radiusY="30.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <Circle fx:id="theme3" fill="WHITE" layoutX="240.0" layoutY="142.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="theme4" layoutX="319.0" layoutY="139.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-            <ComboBox fx:id="currencyMenu" layoutX="54.0" layoutY="215.0" prefWidth="150.0" />
+            <Circle fx:id="theme1" fill="WHITE" layoutX="85.0" layoutY="155.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <Arc layoutX="85.0" layoutY="155.0" length="180.0" radiusX="30.0" radiusY="30.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Circle fx:id="theme2" layoutX="164.0" layoutY="154.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <Arc fill="WHITE" layoutX="164.0" layoutY="154.0" length="180.0" radiusX="30.0" radiusY="30.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Circle fx:id="theme3" fill="WHITE" layoutX="240.0" layoutY="154.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="theme4" layoutX="319.0" layoutY="152.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <ComboBox fx:id="currencyMenu" layoutX="54.0" layoutY="267.0" prefWidth="150.0" promptText="Currency" />
+            <Button layoutX="56.0" layoutY="467.0" mnemonicParsing="false" text="Delete Account" textFill="RED" />
+            <Text layoutX="54.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a currency">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="56.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Account">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
         </children></Pane>
 </children>
 </AnchorPane>
