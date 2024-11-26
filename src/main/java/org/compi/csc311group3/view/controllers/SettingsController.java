@@ -62,10 +62,8 @@ public class SettingsController {
         ChangeScreen("Expense.fxml", 850, 560, addExpenseLink);
     }
     @FXML
-    void addDepositLinkClicked(ActionEvent event) {
-
-        // TODO: Implement functionality to navigate to addDeposit page
-
+    void addDepositLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("deposit-view.fxml", 850, 560, addDepositLink);
     }
     @FXML
     void settingsLinkClicked(ActionEvent event) throws IOException {

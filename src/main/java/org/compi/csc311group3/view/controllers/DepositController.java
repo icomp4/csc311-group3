@@ -128,11 +128,18 @@ public class DepositController {
         }
     }
 
-    @FXML void addDepositLinkClicked(ActionEvent event) throws IOException { }
-    @FXML void addExpenseLinkClicked(ActionEvent event) { }
+    @FXML void addDepositLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("deposit-view.fxml", 850, 560, addDepositLink);
+    }
+    @FXML void addExpenseLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("Expense.fxml", 850, 560, addExpenseLink);
+    }
     @FXML void analyticsLinkClicked(ActionEvent event) { }
     @FXML void dashboardLinkClicked(ActionEvent event) throws IOException {
         ChangeScreen("dashboard-view.fxml", 850, 560, dashboardLink);
     }
-    @FXML void settingsLinkClicked(ActionEvent event) { }
+    @FXML
+    void settingsLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("settings.fxml", 850, 560, settingsLink);
+    }
 }
