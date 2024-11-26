@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="560.0" prefWidth="850.0" stylesheets="@dashboardStyles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.view.controllers.SettingsController">
+<AnchorPane fx:id="root" prefHeight="560.0" prefWidth="850.0" stylesheets="@dashboardStyles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.view.controllers.SettingsController">
 <children>
     <VBox fx:id="leftSection" layoutX="-2.0" prefHeight="560.0" prefWidth="210.0">
         <children>
@@ -101,9 +101,9 @@
             </Text>
         </children>
     </HBox>
-    <Pane fx:id="midSection" layoutX="187.0" prefHeight="560.0" prefWidth="662.0">
+    <Pane fx:id="midSection" layoutX="187.0" prefHeight="560.0" prefWidth="662.0" styleClass="midSection" stylesheets="@dashboardStyles.css">
         <children>
-            <Text layoutX="52.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
+            <Text fx:id="headerText" layoutX="52.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
                 <font>
                     <Font name="System Bold" size="20.0" />
                 </font>
@@ -118,7 +118,7 @@
             <Circle fx:id="theme2" layoutX="164.0" layoutY="154.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
             <Arc fill="WHITE" layoutX="164.0" layoutY="154.0" length="180.0" radiusX="30.0" radiusY="30.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
             <Circle fx:id="theme3" fill="WHITE" layoutX="240.0" layoutY="154.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="theme4" layoutX="319.0" layoutY="152.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="theme4" layoutX="319.0" layoutY="152.0" onMouseClicked="#theme4" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
             <ComboBox fx:id="currencyMenu" layoutX="54.0" layoutY="267.0" prefWidth="150.0" promptText="Currency" />
             <Button layoutX="56.0" layoutY="467.0" mnemonicParsing="false" text="Delete Account" textFill="RED" />
             <Text layoutX="54.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a currency">
@@ -131,6 +131,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
+
         </children></Pane>
 </children>
 </AnchorPane>

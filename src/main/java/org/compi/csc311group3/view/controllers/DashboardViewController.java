@@ -3,6 +3,7 @@ package org.compi.csc311group3.view.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -112,9 +113,8 @@ public class DashboardViewController implements Runnable{
 
     }
     @FXML
-    void settingsLinkClicked(ActionEvent event) {
-
-        // TODO: Implement functionality to navigate to settings page
+    void settingsLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("settings.fxml", 850, 560, settingsLink);
     }
 
 
@@ -158,6 +158,17 @@ public class DashboardViewController implements Runnable{
     public void startExport(){
         Thread myThread = new Thread(this);
         myThread.start();
+    }
+
+    public void darkTheme(ActionEvent actionEvent) {
+        try {
+            Stage stage = (Stage) totalBalanceText.getScene().getWindow();
+            Scene scene = stage.getScene();
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource("/css/theme2.css").toExternalForm());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
