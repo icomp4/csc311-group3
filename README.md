@@ -1,4 +1,4 @@
-![leaf](https://github.com/user-attachments/assets/61df3963-d75f-496d-86b4-44b2ef97bfe7)
+![leaf](https://github.com/user-attachments/assets/61df3963-d75f-496d-86b4-44b2ef97bfe7) Finance Application
 
 ## How to create an issue and branch: 
 ### - Go to [issues](https://github.com/icomp4/csc311-group3/issues)
