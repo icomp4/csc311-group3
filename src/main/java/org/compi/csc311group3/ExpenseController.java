@@ -24,11 +24,12 @@ import java.util.List;
 
 public class ExpenseController {
 
-    public Text dashboardLink;
-    public Text analyticsLink;
-    public Text addExpenseLink;
-    public Text addDepositLink;
-    public Text settingsLink;
+
+    public Button dashboardLink;
+    public Button analyticsLink;
+    public Button addExpenseLink;
+    public Button addDepositLink;
+    public Button settingsLink;
     @FXML
     private TableView<Expense> expenseTableView;
     @FXML
@@ -220,29 +221,28 @@ public class ExpenseController {
         }
     }
     @FXML
-    void dashboardLinkClicked(javafx.scene.input.MouseEvent event) throws IOException {
-        ChangeScreen("dashboard-view.fxml", 850, 560, addExpenseLink);
+    void dashboardLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("dashboard-view.fxml", 850, 560, dashboardLink);
     }
     @FXML
-    void analyticsLinkClicked(javafx.scene.input.MouseEvent event) {
+    void analyticsLinkClicked(ActionEvent event) {
 
         // TODO: Implement functionality to navigate to analytics page
 
     }
     @FXML
-    void addExpenseLinkClicked(javafx.scene.input.MouseEvent event) throws IOException {
+    void addExpenseLinkClicked(ActionEvent event) throws IOException {
         ChangeScreen("Expense.fxml", 850, 560, addExpenseLink);
     }
     @FXML
-    void addDepositLinkClicked(javafx.scene.input.MouseEvent event) {
+    void addDepositLinkClicked(ActionEvent event) throws IOException {
 
-        // TODO: Implement functionality to navigate to addDeposit page
-
+        ChangeScreen("deposit-view.fxml", 850, 560, addDepositLink);
     }
     @FXML
-    void settingsLinkClicked(javafx.scene.input.MouseEvent event) {
-
-        // TODO: Implement functionality to navigate to settings page
+    void settingsLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("settings.fxml", 850, 560, settingsLink);
     }
+
 
 }
