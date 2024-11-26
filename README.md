@@ -24,6 +24,7 @@
 
 # What we need to do:
 - Finish backend logic for deposits, and connect it to the frontend
-- Create the analytics page, and associated backend functioanliy
+- Finish backend logic for the dashboard
+- Create the analytics page, and associated backend functionality
 - Finalize the styling and name of the project
 - Overall bug fixes, finishing touches
