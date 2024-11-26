@@ -12,7 +12,7 @@ public class ExpenseDAO {
     private final DbConnection dbConnection = new DbConnection();
 
     public List<Expense> getAllExpenses() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM expenses";
+        String query = "SELECT * FROM expenses ORDER BY date_time DESC";
         List<Expense> expenses = new ArrayList<>();
         try(Connection connection = dbConnection.getConnection();
             Statement stmt = connection.createStatement();

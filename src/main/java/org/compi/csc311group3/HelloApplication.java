@@ -25,6 +25,7 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }*/
+    /**
     //Added to test expense page and back end functionality
     @Override
     public void start(Stage stage) throws IOException {
@@ -34,6 +35,18 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+*/
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Analytics.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        stage.setTitle("Finance Application");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
 
     /*
     //used for dashboard testing so that dashboard page shows upon running the application
