@@ -1,8 +1,20 @@
 package org.compi.csc311group3;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
+import jdk.jfr.Category;
+import org.compi.csc311group3.service.UserService;
+import org.compi.csc311group3.view.controllers.LoginController;
+
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.time.LocalDate;
+
+import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 import org.compi.csc311group3.database.DbConnection;
 import org.compi.csc311group3.database.ExpenseDAO;
 import org.compi.csc311group3.service.UserService;
@@ -12,6 +24,11 @@ import java.util.List;
 
 public class ExpenseController {
 
+    public Text dashboardLink;
+    public Text analyticsLink;
+    public Text addExpenseLink;
+    public Text addDepositLink;
+    public Text settingsLink;
     @FXML
     private TableView<Expense> expenseTableView;
     @FXML
@@ -40,6 +57,7 @@ public class ExpenseController {
     private Button editButton;
     @FXML
     private Button newCategoryButton;
+    
 
     private UserService userService = UserService.getInstance();
 
@@ -201,4 +219,30 @@ public class ExpenseController {
             e.printStackTrace();
         }
     }
+    @FXML
+    void dashboardLinkClicked(javafx.scene.input.MouseEvent event) throws IOException {
+        ChangeScreen("dashboard-view.fxml", 850, 560, addExpenseLink);
+    }
+    @FXML
+    void analyticsLinkClicked(javafx.scene.input.MouseEvent event) {
+
+        // TODO: Implement functionality to navigate to analytics page
+
+    }
+    @FXML
+    void addExpenseLinkClicked(javafx.scene.input.MouseEvent event) throws IOException {
+        ChangeScreen("Expense.fxml", 850, 560, addExpenseLink);
+    }
+    @FXML
+    void addDepositLinkClicked(javafx.scene.input.MouseEvent event) {
+
+        // TODO: Implement functionality to navigate to addDeposit page
+
+    }
+    @FXML
+    void settingsLinkClicked(javafx.scene.input.MouseEvent event) {
+
+        // TODO: Implement functionality to navigate to settings page
+    }
+
 }
