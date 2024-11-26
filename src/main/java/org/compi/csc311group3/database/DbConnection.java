@@ -36,7 +36,7 @@ public class DbConnection {
                 username VARCHAR(200) NOT NULL UNIQUE,
                 email VARCHAR(200) NOT NULL,
                 password VARCHAR(200) NOT NULL
-            )
+            );
             """;
 
         // Method to initialize the expense table
@@ -64,20 +64,20 @@ public class DbConnection {
          */
 
         String createExpenseTable = """
-                    CREATE TABLE IF NOT EXISTS expenses(
+                    CREATE TABLE IF NOT EXISTS expenses (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     description TEXT,
                     category VARCHAR(255) NOT NULL,
                     amount DECIMAL(10, 2) NOT NULL
-                    )
+                    );
                     """;
 
         String createCategoriesTables = """
                    CREATE TABLE IF NOT EXISTS categories(
                    id INT AUTO_INCREMENT PRIMARY KEY,
                    name VARCHAR(255) UNIQUE NOT NULL
-                   )
+                   );
                    """;
 
         try (Statement stmt = conn.createStatement()) {
