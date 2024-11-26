@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class HelloApplication extends Application {
+    /**
     @Override
     public void start(Stage stage) throws IOException {
         InputStream iconStream = getClass().getResourceAsStream("/org/compi/csc311group3/dashboardIcons/leaf.png");
@@ -21,6 +22,15 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Finance Application");
         stage.getIcons().add(icon);
+        stage.setScene(scene);
+        stage.show();
+    }*/
+    //Added to test expense page and back end functionality
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Expense.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        stage.setTitle("Finance Application");
         stage.setScene(scene);
         stage.show();
     }
