@@ -26,6 +26,7 @@ public class DbConnection {
 
         return conn;
     }
+
     private void initializeTables(Connection conn) throws SQLException {
 
         // Method to initialize the user table
@@ -49,7 +50,7 @@ public class DbConnection {
          |  5 |  75.00 | Food        | Grocery shopping        | 2024-11-17 14:30:45 |       2 |
          +----+--------+-------------+-------------------------+---------------------+---------+
          */
-        String createExpensesTable = """
+        /**String createExpensesTable = """
             CREATE TABLE IF NOT EXISTS expenses (
                 id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                 amount DECIMAL(10, 2) NOT NULL,
@@ -60,14 +61,32 @@ public class DbConnection {
                 FOREIGN KEY (user_id) REFERENCES users(id)
             )
             """;
+         */
+
+        String createExpenseTable = """
+                    CREATE TABLE IF NOT EXISTS expenses(
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    description TEXT,
+                    category VARCHAR(255) NOT NULL,
+                    amount DECIMAL(10, 2) NOT NULL
+                    )
+                    """;
+
+        String createCategoriesTables = """
+                   CREATE TABLE IF NOT EXISTS categories(
+                   id INT AUTO_INCREMENT PRIMARY KEY,
+                   name VARCHAR(255) UNIQUE NOT NULL
+                   )
+                   """;
 
         try (Statement stmt = conn.createStatement()) {
 
             // Execute the statements
             stmt.executeUpdate(createUsersTable);
-            stmt.executeUpdate(createExpensesTable);
+            stmt.executeUpdate(createExpenseTable);
+            stmt.executeUpdate(createCategoriesTables);
             System.out.println("Database tables initialized successfully.");
         }
     }
-
 }

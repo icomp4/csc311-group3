@@ -12,7 +12,7 @@ public class ExpenseDAO {
     private final DbConnection dbConnection = new DbConnection();
 
     public List<Expense> getAllExpenses() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM expense";
+        String query = "SELECT * FROM expenses";
         List<Expense> expenses = new ArrayList<>();
         try(Connection connection = dbConnection.getConnection();
             Statement stmt = connection.createStatement();
@@ -20,7 +20,7 @@ public class ExpenseDAO {
             while (rs.next()) {
                 Expense expense = new Expense(
                         rs.getInt("id"),
-                        rs.getTimestamp("expense_date").toLocalDateTime(),
+                        rs.getTimestamp("date_time").toLocalDateTime(),
                         rs.getString("description"),
                         rs.getString("category"),
                         rs.getDouble("amount")
@@ -65,7 +65,7 @@ public class ExpenseDAO {
     }
 
     public void deleteExpense(int id) throws SQLException, ClassNotFoundException {
-        String query = "DELETE FROM expense WHERE id = ?";
+        String query = "DELETE FROM expenses WHERE id = ?";
         try(Connection connection = dbConnection.getConnection();
         PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -74,7 +74,7 @@ public class ExpenseDAO {
     }
 
     public void updateExpense(Expense expense) throws SQLException, ClassNotFoundException {
-        String query = "UPDATE expenses SET date_time = ?, description = ?, amount = ? WHERE id = ?";
+        String query = "UPDATE expenses SET date_time = ?, description = ?, category = ?, amount = ? WHERE id = ?";
 
         try(Connection connection = dbConnection.getConnection();
         PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -114,9 +114,9 @@ public class ExpenseDAO {
         try (Connection connection = dbConnection.getConnection();
         Statement stmt = connection.createStatement()){
             String createExpenseTable = """
-                    CREATE TABLE IF NOT EXISTS expense1(
+                    CREATE TABLE IF NOT EXISTS expenses(
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    date_time DATETIME NOT NULL,
+                    date_time TIMESTAMP DEAFAULT CURRENT_TIMESTAMP NOT NULL,
                     description VARCHAR(255),
                     category VARCHAR(255) NOT NULL,
                     amount DECIMAL(10, 2) NOT NULL

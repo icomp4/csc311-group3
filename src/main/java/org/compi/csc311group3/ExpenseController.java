@@ -6,7 +6,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.compi.csc311group3.database.DbConnection;
 import org.compi.csc311group3.database.ExpenseDAO;
 import org.compi.csc311group3.service.UserService;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -109,7 +108,6 @@ public class ExpenseController {
         }
     }
 
-
     public void editExpense(){
         Expense selectedExpense = expenseTableView.getSelectionModel().getSelectedItem();
         if(selectedExpense != null){
@@ -129,10 +127,10 @@ public class ExpenseController {
                    showErrorAlert("Please enter a valid amount");
                    return;
            }
+           selectedExpense.setDate_time(date_time);
            selectedExpense.setDescription(description);
            selectedExpense.setCategory(category);
            selectedExpense.setAmount(amount);
-           selectedExpense.setDate_time(date_time);
 
            try {
                expenseDAO.updateExpense(selectedExpense);
