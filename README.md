@@ -28,3 +28,13 @@
 - Create the analytics page, and associated backend functionality
 - Finalize the styling and name of the project
 - Overall bug fixes, finishing touches
+
+# Design Resources:
+
+### Icons
+- **Google Material Icons**: [https://fonts.google.com/icons](https://fonts.google.com/icons)
+  - **Attribution**: Icons made by Google from [Material Icons](https://fonts.google.com/icons)
+
+### Colors
+- **Material Design Color Palette**: [https://m3.material.io/styles/color/advanced/define-new-colors](https://m3.material.io/styles/color/advanced/define-new-colors)
+  - The color scheme used in this project was sourced from Material Design's color guidelines.
