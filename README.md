@@ -4,7 +4,7 @@
 - Finance application to help track spending habits
 - Users can sign up for a free account and login with their credentials
 - They can then add expenses, update their balances, and categorize expenses to see what they are spending the most money on
-- It features a settings page so users can change themes, select their prefered currency, and delete their account
+- It features a settings page so users can change themes, select their preferred currency, and delete their account
 
 # About the tech: 
 - Azure MySQL database
