@@ -116,8 +116,8 @@ public class ExpenseDAO {
             String createExpenseTable = """
                     CREATE TABLE IF NOT EXISTS expenses(
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    date_time TIMESTAMP DEAFAULT CURRENT_TIMESTAMP NOT NULL,
-                    description VARCHAR(255),
+                    date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    description TEXT,
                     category VARCHAR(255) NOT NULL,
                     amount DECIMAL(10, 2) NOT NULL
                     );
