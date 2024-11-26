@@ -107,10 +107,9 @@ public class DashboardViewController implements Runnable{
         ChangeScreen("Expense.fxml", 850, 560, addExpenseLink);
     }
     @FXML
-    void addDepositLinkClicked(ActionEvent event) {
+    void addDepositLinkClicked(ActionEvent event) throws IOException {
 
-        // TODO: Implement functionality to navigate to addDeposit page
-
+        ChangeScreen("deposit-view.fxml", 850, 560, addDepositLink);
     }
     @FXML
     void settingsLinkClicked(ActionEvent event) throws IOException {

@@ -4,18 +4,26 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class HelloApplication extends Application {
-    /*@Override
+    @Override
     public void start(Stage stage) throws IOException {
+        InputStream iconStream = getClass().getResourceAsStream("/org/compi/csc311group3/dashboardIcons/leaf.png");
+        if (iconStream == null) {
+            throw new IOException("Icon file not found!");
+        }
+        Image icon = new Image(iconStream);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Finance Application");
+        stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
-    }*/
+    }
 
 
     //used for dashboard testing so that dashboard page shows upon running the application
