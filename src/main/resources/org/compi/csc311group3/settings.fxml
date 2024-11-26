@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" prefHeight="560.0" prefWidth="850.0" stylesheets="@dashboardStyles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.view.controllers.SettingsController">
+<children>
+    <VBox fx:id="leftSection" layoutX="-2.0" prefHeight="560.0" prefWidth="210.0">
+        <children>
+            <Pane prefHeight="229.0" prefWidth="210.0">
+                <VBox.margin>
+                    <Insets top="150.0" />
+                </VBox.margin>
+                <children>
+                    <VBox layoutX="51.0" layoutY="49.0" prefHeight="200.0" prefWidth="100.0" spacing="2.0">
+                        <children>
+                            <Button fx:id="dashboardLink" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#dashboardLinkClicked" style="-fx-background-color: transparent;" text="Dashboard" textFill="WHITE">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Button>
+                            <Button fx:id="analyticsLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#analyticsLinkClicked" style="-fx-background-color: transparent;" text="Analytics" textFill="WHITE">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Button>
+                            <Button fx:id="addExpenseLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" onAction="#addExpenseLinkClicked" style="-fx-background-color: transparent;" text="Add Expense" textFill="WHITE">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Button>
+                            <Button fx:id="addDepositLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#addDepositLinkClicked" style="-fx-background-color: transparent;" text="Add Deposit" textFill="WHITE">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Button>
+                            <Button fx:id="settingsLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#settingsLinkClicked" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Button>
+                        </children>
+                    </VBox>
+                    <Text fill="WHITE" layoutX="21.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage" wrappingWidth="49.737998962402344" />
+                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="31.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@dashboardIcons/dashboard.png" />
+                        </image>
+                    </ImageView>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="31.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@dashboardIcons/analytics.png" />
+                        </image>
+                    </ImageView>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="31.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@dashboardIcons/addExpense.png" />
+                        </image>
+                    </ImageView>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="31.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@dashboardIcons/addDeposit.png" />
+                        </image>
+                    </ImageView>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="31.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@dashboardIcons/settings.png" />
+                        </image>
+                    </ImageView>
+                </children>
+            </Pane>
+        </children></VBox>
+    <HBox prefHeight="34.0" prefWidth="200.0">
+        <children>
+            <ImageView fitHeight="33.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                <HBox.margin>
+                    <Insets left="8.0" top="26.0" />
+                </HBox.margin>
+                <image>
+                    <Image url="@dashboardIcons/leaf.png" />
+                </image>
+            </ImageView>
+            <Text fx:id="logoText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Finance App">
+                <font>
+                    <Font name="System Bold" size="21.0" />
+                </font>
+                <HBox.margin>
+                    <Insets top="30.0" />
+                </HBox.margin>
+            </Text>
+        </children>
+    </HBox>
+    <Pane fx:id="midSection" layoutX="187.0" prefHeight="560.0" prefWidth="662.0" styleClass="midSection" stylesheets="@dashboardStyles.css">
+        <children>
+            <Text fx:id="headerText" layoutX="52.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
+                <font>
+                    <Font name="System Bold" size="20.0" />
+                </font>
+            </Text>
+            <Text layoutX="52.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Theme">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Circle fx:id="theme1" fill="WHITE" layoutX="85.0" layoutY="155.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <Arc layoutX="85.0" layoutY="155.0" length="180.0" radiusX="30.0" radiusY="30.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Circle fx:id="theme2" layoutX="164.0" layoutY="154.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <Arc fill="WHITE" layoutX="164.0" layoutY="154.0" length="180.0" radiusX="30.0" radiusY="30.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Circle fx:id="theme3" fill="WHITE" layoutX="240.0" layoutY="154.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="theme4" layoutX="319.0" layoutY="152.0" onMouseClicked="#theme4" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <ComboBox fx:id="currencyMenu" layoutX="54.0" layoutY="267.0" prefWidth="150.0" promptText="Currency" />
+            <Button layoutX="56.0" layoutY="467.0" mnemonicParsing="false" text="Delete Account" textFill="RED" />
+            <Text layoutX="54.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a currency">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="56.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Account">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+
+        </children></Pane>
+</children>
+</AnchorPane>

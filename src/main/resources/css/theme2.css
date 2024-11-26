@@ -1,9 +1,9 @@
 #leftSection {
-    -fx-background-color: #000000;
+    -fx-background-color: #b8b8b8;
 }
 
 #midSection {
-    -fx-background-color: #f8f8f8;
+    -fx-background-color: #2d2d2d;
     -fx-background-radius: 20, 5, 5, 20; /*top left, top right, bottom right, bottom left*/
 }
 
