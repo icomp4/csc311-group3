@@ -164,7 +164,7 @@ public class DashboardViewController implements Runnable{
             Stage stage = (Stage) totalBalanceText.getScene().getWindow();
             Scene scene = stage.getScene();
             scene.getStylesheets().clear();
-            scene.getStylesheets().add(getClass().getResource("/css/theme2.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/org/compi/csc311group3/styling/theme4.css").toExternalForm());
         } catch (Exception e) {
             e.printStackTrace();
         }

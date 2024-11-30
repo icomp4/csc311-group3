@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="560.0" prefWidth="850.0" stylesheets="@dashboardStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.ExpenseController">
+<AnchorPane prefHeight="560.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.ExpenseController">
    <children>
       <VBox fx:id="leftSection" layoutX="-2.0" prefHeight="560.0" prefWidth="210.0">
          <children>

@@ -1,0 +1,237 @@
+.root{
+    -fx-background-color: #121212;
+}
+
+.label{
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-field{
+    -fx-background-color: #2C2C2E;
+    -fx-border-color: #3A3A3C;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    /*-fx-background-radius: 6px;*/
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #8E8E93;
+}
+
+#leftSection {
+    -fx-background-color: #000000;
+}
+
+#midSection {
+    -fx-background-color: #1C1C1E;
+    -fx-background-radius: 20 0 0 20 / 20 0 0 20; /*top left, top right, bottom right, bottom left*/
+
+    -fx-border-color: transparent transparent transparent transparent;
+}
+
+#balancePane, #expensePane, #budgetPane, #savingsPane, #recentExpensesPane {
+    -fx-background-color: #3A3A3C;
+    -fx-background-radius: 10;
+}
+
+
+
+#barChart{
+    -fx-background-color: #3A3A3C;
+    -fx-background-radius: 10;
+}
+
+.expenses {
+    -fx-border-color: #3A3A3C;
+    -fx-border-radius: 50px;
+}
+
+.chart {
+    -fx-padding: 0px;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-bar {
+    -fx-bar-fill: #4dec00;
+    /*-fx-background-insets: 0,1,2;*/
+    -fx-background-radius: 15 15 0 0, 4 4 0 0, 3 3 0 0; /*rounds the bar corners*/
+}
+
+#deleteAccountBtn {
+    -fx-background-color: #555555;
+    -fx-text-fill: RED;
+    -fx-background-radius: 2px;
+    -fx-padding: 8px 16px;
+}
+
+.button:hover {
+    -fx-background-color: #005BBB;
+    -fx-cursor: hand;
+}
+
+
+#loginButton{
+    -fx-background-color: #228131;
+    -fx-border: none;
+    -fx-background-radius: 0px;
+    -fx-padding: 5px;
+    -fx-text-fill: #fff;
+}
+#loginButton:hover{
+    -fx-background-color: #1a6c2e;
+    -fx-cursor: hand;
+}
+#registerButton{
+    -fx-padding: 5px;
+}
+#registerButton:hover{
+    -fx-cursor: hand;
+}
+#registerbttn{
+    -fx-background-color: #228131;
+    -fx-border: none;
+    -fx-background-radius: 0px;
+    -fx-padding: 5px;
+    -fx-text-fill: #fff;
+}
+
+Text {
+    -fx-fill: #FFFFFF; /* White text on dark backgrounds */
+}
+
+Circle {
+    -fx-stroke: #3A3A3C; /* Subtle stroke for iOS theme */
+    -fx-stroke-width: 2px;
+}
+
+#currencyMenu.combo-box {
+    -fx-background-color: #2C2C2E; /* Dark background for combo box */
+    -fx-border-color: #3A3A3C; /* Subtle border to match the dark theme */
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px; /* Rounded corners for modern look */
+    -fx-text-fill: #FFFFFF; /* White text for readability */
+    -fx-padding: 2px;
+    -fx-font-size: 14px; /* Standard font size */
+}
+
+#currencyMenu.combo-box .arrow-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+}
+
+#currencyMenu.combo-box .list-cell {
+    -fx-background-color: #1C1C1E;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+}
+
+#currencyMenu.combo-box .list-cell:hover {
+    -fx-background-color: rgba(0, 122, 255, 0);
+    -fx-text-fill: #FFFFFF;
+}
+
+#currencyMenu.combo-box .list-cell:selected {
+    -fx-background-color: rgba(10, 132, 255, 0);
+    -fx-text-fill: #FFFFFF;
+}
+
+#currencyMenu.combo-box .prompt-text {
+    -fx-text-fill: #8E8E93;
+}
+
+#currencyMenu.combo-box:focused {
+    -fx-border-color: #47b3ff; /* iOS blue border when focused */
+    -fx-border-width: 2px; /* Slightly thicker border for focus effect */
+}
+
+
+/*expense styles*/
+/* Table row when selected and focused */
+.table-view:focused .table-row-cell:selected .table-cell {
+    -fx-background-color: #2C2C2E; /* Dark background for selected row */
+    -fx-text-fill: #7cf675; /* iOS accent color for text */
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+}
+
+/* Filler row style */
+.table-view .filler {
+    -fx-background-color: #2C2C2E; /* Subtle dark background for filler */
+}
+
+/* General table cell styling */
+.table-view .cell {
+    -fx-border-color: transparent transparent #3A3A3C transparent; /* Soft border below each cell */
+    -fx-border-width: 0.5px;
+}
+
+/* Empty cells should have no border */
+.table-view .cell:empty {
+    -fx-border-color: transparent;
+}
+
+/* Main table view container styling */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2px;
+    -fx-border-color: grey;
+    -fx-border-radius: 2px;
+    -fx-border-width: 1px;
+}
+
+/* Column header background color */
+.table-view .column-header-background {
+    -fx-background-color: #2C2C2E; /* Dark gray for header background */
+    -fx-border-width: 1px;
+    -fx-border-color: #3A3A3C; /* Darker border for header */
+}
+
+/* Column header label styling */
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+    -fx-text-fill: #FFFFFF; /* White text for contrast */
+}
+
+/* Text color for column header */
+.table-view .column-header-background .label {
+    -fx-text-fill: #FFFFFF; /* Light text for dark background */
+}
+
+/* Table row cell styling */
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Even rows with a dark background */
+.table-row-cell:even {
+    -fx-background-color: #212123; /* Slightly lighter dark gray */
+}
+
+/* Odd rows with a darker background */
+.table-row-cell:odd {
+    -fx-background-color: #2C2C2E; /* Darker gray for odd rows */
+}
+
+/* General cell text styling */
+.table-view .table-cell {
+    -fx-text-fill: #FFFFFF; /* Light text for dark mode */
+}
+
+/* Empty row cells */
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Empty table cells should have no border */
+.table-cell:empty {
+    -fx-border-color: transparent;
+}
+

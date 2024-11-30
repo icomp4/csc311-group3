@@ -7,7 +7,6 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -71,17 +70,34 @@ public class SettingsController {
     }
 
 
-    public void theme4(MouseEvent mouseEvent) {
+    /*public void theme4(MouseEvent mouseEvent) {
         try {
             Stage stage = (Stage) root.getScene().getWindow();
             Scene scene = stage.getScene();
             scene.getStylesheets().clear();
-            URL cssURL = getClass().getResource("/css/theme2.css");
+            URL cssURL = getClass().getResource("/org/compi/csc311group3/styling/theme4.css");
             System.out.println("css file location: " + cssURL.toExternalForm());
             scene.getStylesheets().add(cssURL.toExternalForm());
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }*/
+
+    public void setTheme1(MouseEvent mouseEvent)
+    {
+        ThemeController.applyTheme(ThemeController.Theme.THEME_ONE);
+    }
+    public void setTheme2()
+    {
+        ThemeController.applyTheme(ThemeController.Theme.THEME_TWO);
+    }
+    public void setTheme3()
+    {
+        ThemeController.applyTheme(ThemeController.Theme.THEME_THREE);
+    }
+    public void setTheme4()
+    {
+        ThemeController.applyTheme(ThemeController.Theme.THEME_FOUR);
     }
 
 
