@@ -1,0 +1,107 @@
+#leftSection {
+    -fx-background-color: #efefef;
+}
+
+#leftSection Text {
+    -fx-fill: black;
+}
+
+#logoText {
+    -fx-fill: black;
+}
+
+
+.button {
+    -fx-background-color: rgba(58, 58, 60, 0);
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+    -fx-text-fill: white;
+}
+
+#deleteAccountBtn {
+    -fx-background-color: #cfcfcf;
+    -fx-text-fill: RED;
+    -fx-background-radius: 2px;
+    -fx-padding: 8px 16px;
+}
+
+
+#midSection {
+    -fx-background-color: #f8f8f8;
+    -fx-background-radius: 0, 0, 0, 0; /*top left, top right, bottom right, bottom left*/
+    -fx-border-color: transparent transparent transparent grey;
+    -fx-border-width: 1px;
+}
+
+#balancePane, #expensePane, #budgetPane, #savingsPane {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+
+#recentExpensesPane {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+
+
+#barChart{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+
+.expenses {
+    -fx-border-color: #d4d4d4;
+    -fx-border-radius: 50;
+}
+
+.chart {
+    -fx-padding: 0px;
+}
+
+.chart-plot-background {
+    -fx-background-color: #ffffff; /*white background for the plot area*/
+}
+
+.chart-bar {
+    -fx-bar-fill: #4dec00;
+    /*-fx-background-insets: 0,1,2;*/
+    -fx-background-radius: 15 15 0 0, 4 4 0 0, 3 3 0 0; /*rounds the bar corners*/
+}
+
+.button:hover{
+    -fx-cursor: hand;
+}
+
+
+.deposit-card {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+}
+
+.deposit-card .text {
+    -fx-fill: #000000; /* White text for readability */
+    -fx-border-color: #5e5e5e;
+}
+
+.deposit-card .amount-text {
+    -fx-fill: #4CAF50; /* Green color for positive deposits */
+    -fx-font-weight: bold;
+}
+
+.deposit-card .account-text {
+    -fx-fill: #000000; /* Subdued color for secondary info */
+}
+
+/* Styling the VBox holding cards */
+#depositCardsContainer {
+    -fx-spacing: 15px; /* Space between cards */
+    -fx-padding: 10px;
+}
+
+
+.navBtn{
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}

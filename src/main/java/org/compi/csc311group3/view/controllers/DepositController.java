@@ -78,9 +78,11 @@ public class DepositController {
 
     private Pane createDepositCard(DepositRecord deposit) {
         VBox card = new VBox(5);
+        card.getStyleClass().add("deposit-card"); //added class for styling
         card.setPadding(new Insets(10));
-        card.setStyle("-fx-background-color: white; -fx-border-radius: 5; " +
-                "-fx-background-radius: 5; -fx-border-color: #e0e0e0;");
+        //commented out background color so that it would not overwrite the dark theme color
+        card.setStyle("/*-fx-background-color: white;*/ -fx-border-radius: 5; " +
+                "-fx-background-radius: 5; /*-fx-border-color: #e0e0e0;*/");
         card.setPrefWidth(200);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
@@ -88,8 +90,10 @@ public class DepositController {
 
         Text titleText = new Text("Deposit " + dateStr);
         Text amountText = new Text(String.format("$%.2f", deposit.amount));
-        amountText.setFill(Color.GREEN);
+        //removed green fill color for amountText. I instead added class to be styles in stylesheet
+        amountText.getStyleClass().add("amount-text"); //added class for styling
         Text accountText = new Text(deposit.accountType);
+        accountText.getStyleClass().add("account-text");//added class for styling
 
         card.getChildren().addAll(titleText, amountText, accountText);
 

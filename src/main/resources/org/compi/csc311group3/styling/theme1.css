@@ -17,6 +17,21 @@
     -fx-background-radius: 10;
 }
 
+.button {
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+    -fx-text-fill: black;
+}
+
+.navBtn{
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-font-family: system;
+    -fx-text-fill: white;
+}
+
 #barChart{
     -fx-background-color: white;
     -fx-background-radius: 10;
@@ -46,3 +61,36 @@
 }
 
 
+
+
+#deleteAccountBtn {
+    -fx-background-color: #cfcfcf;
+    -fx-text-fill: RED;
+    -fx-background-radius: 2px;
+    -fx-padding: 8px 16px;
+}
+
+.deposit-card {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+}
+
+.deposit-card .text {
+    -fx-fill: #000000; /* White text for readability */
+    -fx-border-color: #5e5e5e;
+}
+
+.deposit-card .amount-text {
+    -fx-fill: #4CAF50; /* Green color for positive deposits */
+    -fx-font-weight: bold;
+}
+
+.deposit-card .account-text {
+    -fx-fill: #000000; /* Subdued color for secondary info */
+}
+
+/* Styling the VBox holding cards */
+#depositCardsContainer {
+    -fx-spacing: 15px; /* Space between cards */
+    -fx-padding: 10px;
+}

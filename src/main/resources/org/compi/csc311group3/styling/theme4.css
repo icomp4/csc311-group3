@@ -52,6 +52,10 @@
     -fx-background-color: transparent;
 }
 
+.chart-title {
+    -fx-text-fill: white;
+}
+
 .chart-bar {
     -fx-bar-fill: #4dec00;
     /*-fx-background-insets: 0,1,2;*/
@@ -66,10 +70,24 @@
 }
 
 .button:hover {
-    -fx-background-color: #005BBB;
+    -fx-background-color: #3A3A3C;
     -fx-cursor: hand;
 }
 
+.button {
+    -fx-background-color: #3A3A3C;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+    -fx-text-fill: white;
+}
+
+.navBtn{
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-font-family: system;
+}
 
 #loginButton{
     -fx-background-color: #228131;
@@ -97,72 +115,79 @@
 }
 
 Text {
-    -fx-fill: #FFFFFF; /* White text on dark backgrounds */
+    -fx-fill: #FFFFFF;
 }
 
 Circle {
-    -fx-stroke: #3A3A3C; /* Subtle stroke for iOS theme */
+    -fx-stroke: #3A3A3C;
     -fx-stroke-width: 2px;
 }
 
-#currencyMenu.combo-box {
-    -fx-background-color: #2C2C2E; /* Dark background for combo box */
-    -fx-border-color: #3A3A3C; /* Subtle border to match the dark theme */
+#currencyMenu.combo-box,
+#accountSelector.combo-box {
+    -fx-background-color: #2C2C2E;
+    -fx-border-color: #3A3A3C;
     -fx-border-width: 1px;
-    -fx-border-radius: 2px; /* Rounded corners for modern look */
-    -fx-text-fill: #FFFFFF; /* White text for readability */
+    -fx-border-radius: 2px;
+    -fx-text-fill: #FFFFFF;
     -fx-padding: 2px;
-    -fx-font-size: 14px; /* Standard font size */
+    -fx-font-size: 14px;
 }
 
-#currencyMenu.combo-box .arrow-button {
+#currencyMenu.combo-box .arrow-button,
+#accountSelector.combo-box .arrow-button {
     -fx-background-color: transparent;
     -fx-text-fill: #FFFFFF;
 }
 
-#currencyMenu.combo-box .list-cell {
+#currencyMenu.combo-box .list-cell,
+#accountSelector.combo-box .list-cell {
     -fx-background-color: #1C1C1E;
     -fx-text-fill: #FFFFFF;
     -fx-font-size: 14px;
 }
 
-#currencyMenu.combo-box .list-cell:hover {
+#currencyMenu.combo-box .list-cell:hover,
+#accountSelector.combo-box .list-cell:hover {
     -fx-background-color: rgba(0, 122, 255, 0);
     -fx-text-fill: #FFFFFF;
 }
 
-#currencyMenu.combo-box .list-cell:selected {
+#currencyMenu.combo-box .list-cell:selected,
+#accountSelector.combo-box .list-cell:selected {
     -fx-background-color: rgba(10, 132, 255, 0);
     -fx-text-fill: #FFFFFF;
 }
 
-#currencyMenu.combo-box .prompt-text {
+#currencyMenu.combo-box .prompt-text,
+#accountSelector.combo-box .prompt-text {
     -fx-text-fill: #8E8E93;
 }
 
-#currencyMenu.combo-box:focused {
-    -fx-border-color: #47b3ff; /* iOS blue border when focused */
-    -fx-border-width: 2px; /* Slightly thicker border for focus effect */
+#currencyMenu.combo-box:focused,
+#accountSelector.combo-box:focused {
+    -fx-border-color: #47b3ff;
+    -fx-border-width: 2px;
 }
 
 
 /*expense styles*/
 /* Table row when selected and focused */
 .table-view:focused .table-row-cell:selected .table-cell {
-    -fx-background-color: #2C2C2E; /* Dark background for selected row */
-    -fx-text-fill: #7cf675; /* iOS accent color for text */
+    -fx-background-color: #2C2C2E;
+    -fx-text-fill: #7cf675;
     -fx-font-weight: bold;
     -fx-border-color: transparent;
 }
 
 /* Filler row style */
 .table-view .filler {
-    -fx-background-color: #2C2C2E; /* Subtle dark background for filler */
+    -fx-background-color: #2C2C2E;
 }
 
 /* General table cell styling */
 .table-view .cell {
-    -fx-border-color: transparent transparent #3A3A3C transparent; /* Soft border below each cell */
+    -fx-border-color: transparent transparent #3A3A3C transparent;
     -fx-border-width: 0.5px;
 }
 
@@ -182,9 +207,9 @@ Circle {
 
 /* Column header background color */
 .table-view .column-header-background {
-    -fx-background-color: #2C2C2E; /* Dark gray for header background */
+    -fx-background-color: #2C2C2E;
     -fx-border-width: 1px;
-    -fx-border-color: #3A3A3C; /* Darker border for header */
+    -fx-border-color: #3A3A3C;
 }
 
 /* Column header label styling */
@@ -195,12 +220,12 @@ Circle {
 .table-view .column-header .label {
     -fx-font-weight: bold;
     -fx-alignment: center-left;
-    -fx-text-fill: #FFFFFF; /* White text for contrast */
+    -fx-text-fill: #FFFFFF;
 }
 
 /* Text color for column header */
 .table-view .column-header-background .label {
-    -fx-text-fill: #FFFFFF; /* Light text for dark background */
+    -fx-text-fill: #FFFFFF;
 }
 
 /* Table row cell styling */
@@ -211,17 +236,17 @@ Circle {
 
 /* Even rows with a dark background */
 .table-row-cell:even {
-    -fx-background-color: #212123; /* Slightly lighter dark gray */
+    -fx-background-color: #212123;
 }
 
 /* Odd rows with a darker background */
 .table-row-cell:odd {
-    -fx-background-color: #2C2C2E; /* Darker gray for odd rows */
+    -fx-background-color: #2C2C2E;
 }
 
 /* General cell text styling */
 .table-view .table-cell {
-    -fx-text-fill: #FFFFFF; /* Light text for dark mode */
+    -fx-text-fill: #FFFFFF;
 }
 
 /* Empty row cells */
@@ -234,4 +259,206 @@ Circle {
 .table-cell:empty {
     -fx-border-color: transparent;
 }
+
+
+/*scroll pane*/
+
+.scroll-pane {
+    -fx-background-color: #1C1C1E;
+    /*-fx-border-color: #3A3A3C;*/ /* Subtle border to match dark theme */
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: #1C1C1E;
+}
+
+.scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:horizontal .track,
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: #2C2C2E;
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb,
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #4A4A4C;
+    -fx-border-color: #3A3A3C;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb:hover,
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #5A5A5C;
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb:pressed,
+.scroll-pane .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #6A6A6C;
+}
+
+.scroll-pane .scroll-bar:horizontal .increment-button,
+.scroll-pane .scroll-bar:horizontal .decrement-button,
+.scroll-pane .scroll-bar:vertical .increment-button,
+.scroll-pane .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+
+
+.deposit-card {
+    -fx-background-color: #2C2C2E;
+    -fx-border-color: #3A3A3C;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0.5, 0, 2); /* Optional shadow for depth */
+}
+
+.deposit-card .text {
+    -fx-fill: #ffffff;
+    -fx-border-color: #5e5e5e;
+}
+
+.deposit-card .amount-text {
+    -fx-fill: #4CAF50;
+    -fx-font-weight: bold;
+}
+
+.deposit-card .account-text {
+    -fx-fill: #a0a0a0;
+}
+
+/* Styling the VBox holding cards */
+#depositCardsContainer {
+    -fx-spacing: 15px;
+    -fx-padding: 10px;
+}
+
+
+
+
+
+
+.combo-box {
+    -fx-background-color: #2C2C2E;
+    -fx-border-color: #3A3A3C;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #1C1C1E;
+    -fx-text-fill: #FFFFFF;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #3A3A3C;
+    -fx-text-fill: #FFFFFF;
+}
+
+.combo-box .list-cell:selected {
+    -fx-background-color: #3A3A3C;
+    -fx-text-fill: #FFFFFF;
+}
+
+.combo-box .prompt-text {
+    -fx-text-fill: #8E8E93;
+}
+
+.combo-box:focused {
+    -fx-border-color: #303030;
+    -fx-border-width: 2px;
+}
+
+
+#accountSelector {
+    -fx-background-color: #2C2C2E;
+    -fx-border-color: #3A3A3C;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-text-fill: #FFFFFF;
+}
+
+#accountSelector .arrow-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+}
+
+
+.choice-box .context-menu { -fx-background-color: #3A3A3C; }
+
+   .choice-box .menu-item:focused { -fx-background-color: grey; }
+
+   .choice-box .menu-item > .label { -fx-text-fill: white; }
+
+.choice-box .menu-item:focused > .label { -fx-text-fill: white; }
+
+#accountSelector .prompt-text {
+    -fx-text-fill: #8E8E93;
+}
+
+#accountSelector:focused {
+    -fx-border-color: #303030;
+    -fx-border-width: 2px;
+}
+
+
+
+
+/*date picker*/
+.date-picker-popup > .month-year-pane {
+    -fx-base: #303030 ;
+    -fx-mark-highlight-color: -fx-light-text-color ;
+}
+
+.calendar-grid {
+    -fx-background-color: #303030;
+}
+
+.date-picker > .text-field {
+    -fx-text-fill: white;
+}
+
+.date-picker-popup > .month-year-pane {
+    -fx-base: #303030 ;
+    -fx-mark-highlight-color: rgba(48, 48, 48, 0.56);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

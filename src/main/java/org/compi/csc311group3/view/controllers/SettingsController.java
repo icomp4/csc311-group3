@@ -7,6 +7,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,6 +31,16 @@ public class SettingsController {
     private Button settingsLink;
 
     @FXML
+    private Pane theme1Pane;
+    @FXML
+    private Pane theme2Pane;
+    @FXML
+    private Pane theme3Pane;
+    @FXML
+    private Pane theme4Pane;
+
+
+    @FXML
     private AnchorPane root; //used to locate Pane
 
 
@@ -41,8 +52,55 @@ public class SettingsController {
 
     public void initialize() {
 
+        setThemeCircleIndicator();
 
 
+
+
+
+
+
+    }
+
+    public void clearThemeCircles()
+    {
+        theme1Pane.setStyle("-fx-border-color: transparent");
+        theme2Pane.setStyle("-fx-border-color: transparent");
+        theme3Pane.setStyle("-fx-border-color: transparent");
+        theme4Pane.setStyle("-fx-border-color: transparent");
+    }
+
+    private void setThemeCircleIndicator(){
+        ThemeController.Theme theme = ThemeController.getCurrentTheme();
+        if(theme .equals(ThemeController.Theme.THEME_ONE)){
+            clearThemeCircles();
+            theme1Pane.setStyle("-fx-border-color: #FF6347;" +
+                    "-fx-border-width: 3px;"
+                    + "-fx-border-radius: 100px;"
+                    + "-fx-pref-width: 70px;"
+                    + "-fx-pref-height: 70px;");
+        } else if(theme .equals(ThemeController.Theme.THEME_TWO)){
+            clearThemeCircles();
+            theme2Pane.setStyle("-fx-border-color: #FF6347;" +
+                    "-fx-border-width: 3px;"
+                    + "-fx-border-radius: 100px;"
+                    + "-fx-pref-width: 70px;"
+                    + "-fx-pref-height: 70px;");
+        } else if (theme .equals(ThemeController.Theme.THEME_THREE)){
+            clearThemeCircles();
+            theme3Pane.setStyle("-fx-border-color: #FF6347;" +
+                    "-fx-border-width: 3px;"
+                    + "-fx-border-radius: 100px;"
+                    + "-fx-pref-width: 70px;"
+                    + "-fx-pref-height: 70px;");
+        } else if (theme .equals(ThemeController.Theme.THEME_FOUR)){
+            clearThemeCircles();
+            theme4Pane.setStyle("-fx-border-color: #FF6347;" +
+                    "-fx-border-width: 3px;"
+                    + "-fx-border-radius: 100px;"
+                    + "-fx-pref-width: 70px;"
+                    + "-fx-pref-height: 70px;");
+        }
     }
 
 
@@ -86,18 +144,22 @@ public class SettingsController {
     public void setTheme1(MouseEvent mouseEvent)
     {
         ThemeController.applyTheme(ThemeController.Theme.THEME_ONE);
+        setThemeCircleIndicator();
     }
     public void setTheme2()
     {
         ThemeController.applyTheme(ThemeController.Theme.THEME_TWO);
+        setThemeCircleIndicator();
     }
     public void setTheme3()
     {
         ThemeController.applyTheme(ThemeController.Theme.THEME_THREE);
+        setThemeCircleIndicator();
     }
     public void setTheme4()
     {
         ThemeController.applyTheme(ThemeController.Theme.THEME_FOUR);
+        setThemeCircleIndicator();
     }
 
 
