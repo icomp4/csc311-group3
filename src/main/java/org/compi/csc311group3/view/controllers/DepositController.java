@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
+import org.compi.csc311group3.model.Deposit;
+import org.compi.csc311group3.service.DepositService;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -31,10 +33,10 @@ public class DepositController {
 
     private HBox depositCardsContainer;
     private List<DepositRecord> depositHistory;
+    private DepositService depositService;
 
     public void initialize() {
         accountSelector.getItems().addAll("Checking", "Savings");
-
         depositHistory = new ArrayList<>();
 
         depositCardsContainer = new HBox(10);
@@ -43,8 +45,32 @@ public class DepositController {
         scrollPane.setContent(depositCardsContainer);
         scrollPane.setFitToHeight(true);
         scrollPane.setPannable(true);
+        depositService = new DepositService();
 
-        addSampleData();
+        ProgressIndicator loadingIndicator = new ProgressIndicator();
+        depositCardsContainer.getChildren().add(loadingIndicator);
+
+        Thread depositLoader = new Thread(() -> {
+            List<Deposit> deposits = depositService.getDeposits();
+
+            javafx.application.Platform.runLater(() -> {
+                depositCardsContainer.getChildren().clear();
+
+                for (Deposit deposit : deposits) {
+                    DepositRecord record = new DepositRecord(
+                            LocalDate.now(),
+                            deposit.getAmount(),
+                            deposit.getAccount()
+                    );
+                    depositHistory.add(record);
+                    Pane card = createDepositCard(record);
+                    depositCardsContainer.getChildren().add(card);
+                }
+            });
+        });
+
+        depositLoader.setDaemon(true);
+        depositLoader.start();
     }
 
     @FXML
@@ -64,7 +90,11 @@ public class DepositController {
             );
 
             depositHistory.add(0, newDeposit);
-
+            if(accountSelector.getValue().equals("Checking")) {
+                depositService.addDeposit("checking", amount);
+            } else {
+                depositService.addDeposit("savings", amount);
+            }
             Pane newCard = createDepositCard(newDeposit);
             depositCardsContainer.getChildren().add(0, newCard);
 
@@ -103,16 +133,17 @@ public class DepositController {
         alert.showAndWait();
     }
 
-    private void addSampleData() {
-
-        // Sample data
-        depositHistory.add(new DepositRecord(LocalDate.now().minusDays(5), 1200.04, "Savings"));
-        depositHistory.add(new DepositRecord(LocalDate.now().minusDays(20), 154.95, "Checking"));
-        depositHistory.add(new DepositRecord(LocalDate.now().minusDays(35), 249.47, "Checking"));
-        depositHistory.add(new DepositRecord(LocalDate.now().minusDays(50), 2895.45, "Savings"));
-
-        for (DepositRecord deposit : depositHistory) {
-            depositCardsContainer.getChildren().add(createDepositCard(deposit));
+    private void addExistingData() {
+        List<Deposit> deposits = depositService.getDeposits();
+        for (Deposit deposit : deposits) {
+            DepositRecord record = new DepositRecord(
+                    LocalDate.now(),
+                    deposit.getAmount(),
+                    deposit.getAccount()
+            );
+            depositHistory.add(record);
+            Pane card = createDepositCard(record);
+            depositCardsContainer.getChildren().add(card);
         }
     }
 
