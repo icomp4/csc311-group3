@@ -9,7 +9,11 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.compi.csc311group3.model.Deposit;
+import org.compi.csc311group3.service.DepositService;
+
 import java.io.IOException;
+import java.util.List;
 
 
 import static org.compi.csc311group3.HelloApplication.ChangeScreen;
@@ -42,6 +46,7 @@ public class DashboardViewController implements Runnable{
     //bar chart code
     @FXML
     private BarChart<String, Number> barChart;
+    private DepositService depositService;
 
 
 
@@ -86,6 +91,8 @@ public class DashboardViewController implements Runnable{
 
 
         barChart.getData().addAll(set1);//adds data to barChart
+        depositService = new DepositService();
+        calculateBalances();
 
         /***** Bar chart code - end *****/
 
@@ -170,8 +177,22 @@ public class DashboardViewController implements Runnable{
         }
     }
 
-
-
-
-
+    /**
+     * This method is used to calculate the total balance and savings and display them on the dashboard
+     * TODO: Incorporate the expenses into the calculation
+     */
+    private void calculateBalances(){
+        List<Deposit> deposits = depositService.getDeposits();
+        double savings = 0;
+        double checking = 0;
+        for (Deposit deposit : deposits) {
+            if (deposit.getAccount().equals("savings")) {
+                savings += deposit.getAmount();
+            } else {
+                checking += deposit.getAmount();
+            }
+        }
+        totalBalanceText.setText("$" + (savings + checking));
+        savingsText.setText("$" + savings);
+    }
 }
