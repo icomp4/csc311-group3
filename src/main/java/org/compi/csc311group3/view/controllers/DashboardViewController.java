@@ -59,15 +59,21 @@ public class DashboardViewController implements Runnable{
         System.out.println();
 
         String balanceFormated = currencyController.convertCurrencyWithFormat(balance);
+        String expensesFormated = currencyController.convertCurrencyWithFormat(expenses);
+        String monthlyBudgetFormated = currencyController.convertCurrencyWithFormat(monthlyBudget);
+        String savingsFormatted = currencyController.convertCurrencyWithFormat(savings);
 
 
 
         //sets text to assigned values
         //totalBalanceText.setText("$" + balance);
+        //expensesText.setText("$" + expenses);
+        //monthlyBudgetText.setText("$" + monthlyBudget);
+        //savingsText.setText("$" + savings);
         totalBalanceText.setText(balanceFormated);
-        expensesText.setText("$" + expenses);
-        monthlyBudgetText.setText("$" + monthlyBudget);
-        savingsText.setText("$" + savings);
+        expensesText.setText(expensesFormated);
+        monthlyBudgetText.setText(monthlyBudgetFormated);
+        savingsText.setText(savingsFormatted);
 
 
         /***** Bar chart code - start *****/
