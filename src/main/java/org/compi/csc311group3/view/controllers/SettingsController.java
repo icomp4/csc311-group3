@@ -54,7 +54,7 @@ public class SettingsController {
     @FXML
     private ComboBox<String> currencyMenu;
 
-    static CurrencyController currencyController = new CurrencyController();
+    public static CurrencyController currencyController = new CurrencyController();
 
 
     public void initialize() {

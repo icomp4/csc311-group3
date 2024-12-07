@@ -175,7 +175,7 @@ public class DashboardViewController implements Runnable{
         myThread.start();
     }
 
-    public void darkTheme(ActionEvent actionEvent) {
+    /*public void darkTheme(ActionEvent actionEvent) {
         try {
             Stage stage = (Stage) totalBalanceText.getScene().getWindow();
             Scene scene = stage.getScene();
@@ -184,7 +184,7 @@ public class DashboardViewController implements Runnable{
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
 
