@@ -1,10 +1,13 @@
 package org.compi.csc311group3.view.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -48,16 +51,28 @@ public class SettingsController {
     @FXML
     private BarChart<String, Number> barChart;
 
+    @FXML
+    private ComboBox<String> currencyMenu;
+
+    static CurrencyController currencyController = new CurrencyController();
 
 
     public void initialize() {
 
         setThemeCircleIndicator();
 
+        ObservableList<String> currencies = FXCollections.observableArrayList(
+                "USD", "EUR", "GBP", "JPY", "AUD", "CAD"
+        );
 
+        currencyMenu.setItems(currencies);
+        currencyMenu.setValue(currencyController.getCurrencyType());  //default value
 
-
-
+        currencyMenu.setOnAction(event -> {
+            String selectedCurrency = currencyMenu.getValue(); //get the selected currency from combobox
+            System.out.println("selected currency: " + selectedCurrency);
+            currencyController.setCurrencyType(selectedCurrency);//change currency type in the currencyController
+        });
 
 
     }

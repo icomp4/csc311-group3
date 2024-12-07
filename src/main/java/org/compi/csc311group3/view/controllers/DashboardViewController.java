@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 
+import static org.compi.csc311group3.view.controllers.SettingsController.currencyController;
 
 public class DashboardViewController implements Runnable{
 
@@ -53,8 +54,17 @@ public class DashboardViewController implements Runnable{
         double monthlyBudget = 2000;
         double savings = 1000;
 
+        String currentCurrency = currencyController.getCurrencyType();
+        System.out.println("current currency: " + currentCurrency);
+        System.out.println();
+
+        String balanceFormated = currencyController.convertCurrencyWithFormat(balance);
+
+
+
         //sets text to assigned values
-        totalBalanceText.setText("$" + balance);
+        //totalBalanceText.setText("$" + balance);
+        totalBalanceText.setText(balanceFormated);
         expensesText.setText("$" + expenses);
         monthlyBudgetText.setText("$" + monthlyBudget);
         savingsText.setText("$" + savings);
