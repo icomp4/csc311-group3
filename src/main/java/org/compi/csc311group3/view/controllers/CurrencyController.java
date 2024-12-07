@@ -12,7 +12,7 @@ public class CurrencyController {
     private double multiplier = 1; //default multiplier
 
     //exchange rates
-    double EurExchangeRate = 1.06; //this is how much one euro is worth in USD
+    double EurExchangeRate = .95; //this is how much one euro is worth in USD
     double UsdExchangeRate = 1.00; //this is how much one USD is worth in USD
 
     public CurrencyController() {
@@ -70,6 +70,7 @@ public class CurrencyController {
         return formatedWithSymbol;
     }
 
+    //used to convert value to USD before saving in database since all values in database are in USD
     public double convertToUSD(double value) {
         double returnValue  = 0;
         if(currencyType.equals("EUR")){
