@@ -46,7 +46,8 @@ public class DepositService {
                     Deposit deposit = new Deposit(
                             rs.getInt("id"),
                             rs.getString("account_type"),
-                            rs.getDouble("amount")
+                            rs.getDouble("amount"),
+                            rs.getTimestamp("date_time")
                     );
                     deposits.add(deposit);
                 }

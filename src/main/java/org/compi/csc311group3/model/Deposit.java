@@ -1,14 +1,19 @@
 package org.compi.csc311group3.model;
 
+import java.sql.Timestamp;
+
 public class Deposit {
     private int id;
     private String account;
     private double amount;
+    private Timestamp dateTime;
 
-    public Deposit(int id, String account, double amount) {
+
+    public Deposit(int id, String account, double amount, Timestamp dateTime) {
         this.id = id;
         this.account = account;
         this.amount = amount;
+        this.dateTime = dateTime;
     }
 
     public int getId() {
@@ -22,4 +27,6 @@ public class Deposit {
     public double getAmount() {
         return amount;
     }
+
+    public Timestamp getDateTime() {return dateTime;}
 }
