@@ -1,6 +1,7 @@
 package org.compi.csc311group3.database;
 
 import org.compi.csc311group3.Expense;
+import org.compi.csc311group3.service.ExpensesWithTotal;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -11,9 +12,14 @@ import java.sql.Timestamp;
 public class ExpenseDAO {
     private final DbConnection dbConnection = new DbConnection();
 
+    public static double totalExpenseAmount; //variable to store the sum of all expenses.  This piece of data is needed for dashboard page.
+
     public List<Expense> getAllExpenses() throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM expenses";
         List<Expense> expenses = new ArrayList<>();
+
+        totalExpenseAmount = 0; //resets expenses to zero before looping through and recalculating.
+
         try(Connection connection = dbConnection.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query)) {
@@ -26,6 +32,9 @@ public class ExpenseDAO {
                         rs.getDouble("amount")
                 );
                 expenses.add(expense);
+
+                totalExpenseAmount += expense.getAmount(); //add the amount of this expense to the totalAmount
+
             }
         }
         return expenses;
@@ -162,4 +171,32 @@ public class ExpenseDAO {
             throw new RuntimeException(e);
         }
     }
+
+
+    public ExpensesWithTotal getAllExpensesInAnObject() throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM expenses";
+        List<Expense> expenses = new ArrayList<>();
+        double totalExpenseAmount = 0; //resets expenses to zero before looping through and recalculating.
+
+        try(Connection connection = dbConnection.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                Expense expense = new Expense(
+                        rs.getInt("id"),
+                        rs.getTimestamp("date_time").toLocalDateTime(),
+                        rs.getString("description"),
+                        rs.getString("category"),
+                        rs.getDouble("amount")
+                );
+                expenses.add(expense);
+
+                totalExpenseAmount += expense.getAmount(); //add the amount of this expense to the totalAmount
+
+            }
+        }
+        return new ExpensesWithTotal(expenses, totalExpenseAmount);
+    }
+
+
 }

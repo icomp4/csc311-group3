@@ -11,12 +11,16 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.compi.csc311group3.database.ExpenseDAO;
 import org.compi.csc311group3.model.Deposit;
 import org.compi.csc311group3.service.DepositService;
+import org.compi.csc311group3.service.ExpensesWithTotal;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
+import static org.compi.csc311group3.database.ExpenseDAO.totalExpenseAmount; //total expenses from ExpenseDAO;
 
 import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 
@@ -24,6 +28,7 @@ import static org.compi.csc311group3.view.controllers.SettingsController.currenc
 
 public class DashboardViewController implements Runnable{
 
+    ExpenseDAO expenseDAO = new ExpenseDAO(); //used to access expense info for dashboard
 
     @FXML
     private Text totalBalanceText;
@@ -55,7 +60,7 @@ public class DashboardViewController implements Runnable{
     private NumberAxis yAxis;
 
 
-    public void initialize() {
+    public void initialize() throws SQLException, ClassNotFoundException {
 
         //assign data from DB to these variables
         double balance = 3000;
@@ -67,8 +72,11 @@ public class DashboardViewController implements Runnable{
         System.out.println("current currency: " + currentCurrency);
         System.out.println();
 
+        ExpensesWithTotal expensesBundle = expenseDAO.getAllExpensesInAnObject();
+        double totalExpenses = expensesBundle.getTotalExpenseAmount();
+
         String balanceFormated = currencyController.convertCurrencyWithFormat(balance);
-        String expensesFormated = currencyController.convertCurrencyWithFormat(expenses);
+        String expensesFormated = currencyController.convertCurrencyWithFormat(totalExpenses);
         String monthlyBudgetFormated = currencyController.convertCurrencyWithFormat(monthlyBudget);
         String savingsFormatted = currencyController.convertCurrencyWithFormat(savings);
 
