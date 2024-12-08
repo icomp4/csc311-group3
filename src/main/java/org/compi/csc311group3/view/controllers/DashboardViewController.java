@@ -1,18 +1,24 @@
-package org.compi.csc311group3;
+package org.compi.csc311group3.view.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.compi.csc311group3.model.Deposit;
+import org.compi.csc311group3.service.DepositService;
+
 import java.io.IOException;
+import java.util.List;
 
 
 import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 
+import static org.compi.csc311group3.view.controllers.SettingsController.currencyController;
 
 public class DashboardViewController implements Runnable{
 
@@ -41,6 +47,7 @@ public class DashboardViewController implements Runnable{
     //bar chart code
     @FXML
     private BarChart<String, Number> barChart;
+    private DepositService depositService;
 
 
 
@@ -52,11 +59,26 @@ public class DashboardViewController implements Runnable{
         double monthlyBudget = 2000;
         double savings = 1000;
 
+        String currentCurrency = currencyController.getCurrencyType();
+        System.out.println("current currency: " + currentCurrency);
+        System.out.println();
+
+        String balanceFormated = currencyController.convertCurrencyWithFormat(balance);
+        String expensesFormated = currencyController.convertCurrencyWithFormat(expenses);
+        String monthlyBudgetFormated = currencyController.convertCurrencyWithFormat(monthlyBudget);
+        String savingsFormatted = currencyController.convertCurrencyWithFormat(savings);
+
+
+
         //sets text to assigned values
-        totalBalanceText.setText("$" + balance);
-        expensesText.setText("$" + expenses);
-        monthlyBudgetText.setText("$" + monthlyBudget);
-        savingsText.setText("$" + savings);
+        //totalBalanceText.setText("$" + balance);
+        //expensesText.setText("$" + expenses);
+        //monthlyBudgetText.setText("$" + monthlyBudget);
+        //savingsText.setText("$" + savings);
+        totalBalanceText.setText(balanceFormated);
+        expensesText.setText(expensesFormated);
+        monthlyBudgetText.setText(monthlyBudgetFormated);
+        savingsText.setText(savingsFormatted);
 
 
         /***** Bar chart code - start *****/
@@ -85,6 +107,8 @@ public class DashboardViewController implements Runnable{
 
 
         barChart.getData().addAll(set1);//adds data to barChart
+        depositService = new DepositService();
+        calculateBalances();
 
         /***** Bar chart code - end *****/
 
@@ -111,9 +135,8 @@ public class DashboardViewController implements Runnable{
         ChangeScreen("deposit-view.fxml", 850, 560, addDepositLink);
     }
     @FXML
-    void settingsLinkClicked(ActionEvent event) {
-
-        // TODO: Implement functionality to navigate to settings page
+    void settingsLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("settings.fxml", 850, 560, settingsLink);
     }
 
 
@@ -159,8 +182,33 @@ public class DashboardViewController implements Runnable{
         myThread.start();
     }
 
+    /*public void darkTheme(ActionEvent actionEvent) {
+        try {
+            Stage stage = (Stage) totalBalanceText.getScene().getWindow();
+            Scene scene = stage.getScene();
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource("/org/compi/csc311group3/styling/theme4.css").toExternalForm());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 
-
-
-
+    /**
+     * This method is used to calculate the total balance and savings and display them on the dashboard
+     * TODO: Incorporate the expenses into the calculation
+     */
+    private void calculateBalances(){
+        List<Deposit> deposits = depositService.getDeposits();
+        double savings = 0;
+        double checking = 0;
+        for (Deposit deposit : deposits) {
+            if (deposit.getAccount().equals("savings")) {
+                savings += deposit.getAmount();
+            } else {
+                checking += deposit.getAmount();
+            }
+        }
+        totalBalanceText.setText("$" + (savings + checking));
+        savingsText.setText("$" + savings);
+    }
 }

@@ -80,12 +80,24 @@ public class DbConnection {
                    );
                    """;
 
+        String createDepositsTable = """
+                    CREATE TABLE IF NOT EXISTS deposits (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    amount DECIMAL(10, 2) NOT NULL,
+                    user_id INT NOT NULL,
+                    account_type VARCHAR(255) NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                    );
+                    """;
+
         try (Statement stmt = conn.createStatement()) {
 
             // Execute the statements
             stmt.executeUpdate(createUsersTable);
             stmt.executeUpdate(createExpenseTable);
             stmt.executeUpdate(createCategoriesTables);
+            stmt.executeUpdate(createDepositsTable);
             System.out.println("Database tables initialized successfully.");
         }
     }

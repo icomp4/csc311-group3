@@ -22,13 +22,16 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.compi.csc311group3.view.controllers.SettingsController.currencyController; //import currencyController instance from settings
+
 public class ExpenseController {
 
-    public Text dashboardLink;
-    public Text analyticsLink;
-    public Text addExpenseLink;
-    public Text addDepositLink;
-    public Text settingsLink;
+
+    public Button dashboardLink;
+    public Button analyticsLink;
+    public Button addExpenseLink;
+    public Button addDepositLink;
+    public Button settingsLink;
     @FXML
     private TableView<Expense> expenseTableView;
     @FXML
@@ -97,7 +100,9 @@ public class ExpenseController {
 
         double amount;
         try{
-            amount = Double.parseDouble(amountText);
+            //amount = Double.parseDouble(amountText);
+            double amountInUserCurrency = Double.parseDouble(amountText); //amount in user selected currency
+            amount = currencyController.convertToUSD(amountInUserCurrency);//converted from user currency to USD before saved in database
         } catch(NumberFormatException e){
             showErrorAlert("Please enter a valid amount");
             return;
@@ -201,6 +206,13 @@ public class ExpenseController {
     private void loadExpenses(){
         try{
             List<Expense> expenseList = expenseDAO.getAllExpenses();
+
+            //convert the amount values to the correct currency
+            for (Expense expense : expenseList){
+                double convertedAmount = currencyController.convertCurrency(expense.getAmount()); //converts amount to correct currency selected by user in settings
+                expense.setAmount(convertedAmount);
+            }
+
             expenseTableView.setItems(FXCollections.observableArrayList(expenseList));
         } catch (SQLException | ClassNotFoundException e){
             showErrorAlert("Error loading expenses: " + e.getMessage());
@@ -208,29 +220,28 @@ public class ExpenseController {
         }
     }
     @FXML
-    void dashboardLinkClicked(javafx.scene.input.MouseEvent event) throws IOException {
-        ChangeScreen("dashboard-view.fxml", 850, 560, addExpenseLink);
+    void dashboardLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("dashboard-view.fxml", 850, 560, dashboardLink);
     }
     @FXML
-    void analyticsLinkClicked(javafx.scene.input.MouseEvent event) {
+    void analyticsLinkClicked(ActionEvent event) {
 
         // TODO: Implement functionality to navigate to analytics page
 
     }
     @FXML
-    void addExpenseLinkClicked(javafx.scene.input.MouseEvent event) throws IOException {
+    void addExpenseLinkClicked(ActionEvent event) throws IOException {
         ChangeScreen("Expense.fxml", 850, 560, addExpenseLink);
     }
     @FXML
-    void addDepositLinkClicked(javafx.scene.input.MouseEvent event) {
+    void addDepositLinkClicked(ActionEvent event) throws IOException {
 
-        // TODO: Implement functionality to navigate to addDeposit page
-
+        ChangeScreen("deposit-view.fxml", 850, 560, addDepositLink);
     }
     @FXML
-    void settingsLinkClicked(javafx.scene.input.MouseEvent event) {
-
-        // TODO: Implement functionality to navigate to settings page
+    void settingsLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("settings.fxml", 850, 560, settingsLink);
     }
+
 
 }

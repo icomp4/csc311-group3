@@ -6,11 +6,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.compi.csc311group3.view.controllers.ThemeController;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 public class HelloApplication extends Application {
-    /**
     @Override
     public void start(Stage stage) throws IOException {
         InputStream iconStream = getClass().getResourceAsStream("/org/compi/csc311group3/dashboardIcons/leaf.png");
@@ -24,40 +25,7 @@ public class HelloApplication extends Application {
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
-    }*/
-    /**
-    //Added to test expense page and back end functionality
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Expense.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Finance Application");
-        stage.setScene(scene);
-        stage.show();
     }
-*/
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Analytics.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Finance Application");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-
-
-    /*
-    //used for dashboard testing so that dashboard page shows upon running the application
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard-view.fxml")); //show dashboard page for testing purposes
-        Scene scene = new Scene(fxmlLoader.load(), 850, 560);
-        stage.setTitle("Finance Application");
-        stage.setScene(scene);
-        stage.show();
-    }*/
 
     /**
      * This method is used to change the screen
@@ -79,6 +47,8 @@ public class HelloApplication extends Application {
         stage.setTitle("Finance Application");
         stage.setScene(scene);
         stage.show();
+
+        ThemeController.registerScene(scene);//register theme so that style can be applied
     }
 
     public static void main(String[] args) {
