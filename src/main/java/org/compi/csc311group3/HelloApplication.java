@@ -6,6 +6,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.compi.csc311group3.view.controllers.ThemeController;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -45,6 +47,8 @@ public class HelloApplication extends Application {
         stage.setTitle("Finance Application");
         stage.setScene(scene);
         stage.show();
+
+        ThemeController.registerScene(scene);//register theme so that style can be applied
     }
 
     public static void main(String[] args) {

@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="560.0" prefWidth="850.0" stylesheets="@dashboardStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.ExpenseController">
+<AnchorPane prefHeight="560.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.compi.csc311group3.ExpenseController">
    <children>
       <VBox fx:id="leftSection" layoutX="-2.0" prefHeight="560.0" prefWidth="210.0">
          <children>
@@ -26,29 +26,29 @@
                   <Insets top="150.0" />
                </VBox.margin>
                <children>
-                  <VBox layoutX="51.0" layoutY="49.0" prefHeight="200.0" prefWidth="100.0" spacing="2.0">
+                  <VBox layoutX="51.0" layoutY="49.0" prefHeight="200.0" prefWidth="141.0" spacing="2.0">
                      <children>
-                        <Button fx:id="dashboardLink" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#dashboardLinkClicked" style="-fx-background-color: transparent;" text="Dashboard" textFill="WHITE">
+                        <Button fx:id="dashboardLink" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#dashboardLinkClicked" prefHeight="30.0" prefWidth="133.0" style="-fx-background-color: transparent;" styleClass="navBtn" text="Dashboard" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="analyticsLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#analyticsLinkClicked" style="-fx-background-color: transparent;" text="Analytics" textFill="WHITE">
+                        <Button fx:id="analyticsLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#analyticsLinkClicked" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: transparent;" styleClass="navBtn" text="Analytics" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="addExpenseLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" onAction="#addExpenseLinkClicked" style="-fx-background-color: transparent;" text="Add Expense" textFill="WHITE">
+                        <Button fx:id="addExpenseLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" onAction="#addExpenseLinkClicked" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: transparent;" styleClass="navBtn" text="Add Expense" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="addDepositLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#addDepositLinkClicked" style="-fx-background-color: transparent;" text="Add Deposit" textFill="WHITE">
+                        <Button fx:id="addDepositLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="70.0" mnemonicParsing="false" onAction="#addDepositLinkClicked" prefHeight="30.0" prefWidth="139.0" style="-fx-background-color: transparent;" styleClass="navBtn" text="Add Deposit" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="settingsLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#settingsLinkClicked" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE">
+                        <Button fx:id="settingsLink" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#settingsLinkClicked" prefHeight="30.0" prefWidth="134.0" style="-fx-background-color: transparent;" styleClass="navBtn" text="Settings" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>

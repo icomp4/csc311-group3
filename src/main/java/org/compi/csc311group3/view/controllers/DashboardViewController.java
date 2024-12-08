@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 
+import static org.compi.csc311group3.view.controllers.SettingsController.currencyController;
 
 public class DashboardViewController implements Runnable{
 
@@ -58,11 +59,26 @@ public class DashboardViewController implements Runnable{
         double monthlyBudget = 2000;
         double savings = 1000;
 
+        String currentCurrency = currencyController.getCurrencyType();
+        System.out.println("current currency: " + currentCurrency);
+        System.out.println();
+
+        String balanceFormated = currencyController.convertCurrencyWithFormat(balance);
+        String expensesFormated = currencyController.convertCurrencyWithFormat(expenses);
+        String monthlyBudgetFormated = currencyController.convertCurrencyWithFormat(monthlyBudget);
+        String savingsFormatted = currencyController.convertCurrencyWithFormat(savings);
+
+
+
         //sets text to assigned values
-        totalBalanceText.setText("$" + balance);
-        expensesText.setText("$" + expenses);
-        monthlyBudgetText.setText("$" + monthlyBudget);
-        savingsText.setText("$" + savings);
+        //totalBalanceText.setText("$" + balance);
+        //expensesText.setText("$" + expenses);
+        //monthlyBudgetText.setText("$" + monthlyBudget);
+        //savingsText.setText("$" + savings);
+        totalBalanceText.setText(balanceFormated);
+        expensesText.setText(expensesFormated);
+        monthlyBudgetText.setText(monthlyBudgetFormated);
+        savingsText.setText(savingsFormatted);
 
 
         /***** Bar chart code - start *****/
@@ -166,16 +182,16 @@ public class DashboardViewController implements Runnable{
         myThread.start();
     }
 
-    public void darkTheme(ActionEvent actionEvent) {
+    /*public void darkTheme(ActionEvent actionEvent) {
         try {
             Stage stage = (Stage) totalBalanceText.getScene().getWindow();
             Scene scene = stage.getScene();
             scene.getStylesheets().clear();
-            scene.getStylesheets().add(getClass().getResource("/css/theme2.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/org/compi/csc311group3/styling/theme4.css").toExternalForm());
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     /**
      * This method is used to calculate the total balance and savings and display them on the dashboard

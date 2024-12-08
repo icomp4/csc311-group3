@@ -18,6 +18,8 @@ import java.util.List;
 
 import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 
+import static org.compi.csc311group3.view.controllers.SettingsController.currencyController;//import currencyController instance from settings
+
 public class DepositController {
     @FXML private ChoiceBox<String> accountSelector;
     @FXML private Button addDepositLink;
@@ -81,7 +83,8 @@ public class DepositController {
                 return;
             }
 
-            double amount = Double.parseDouble(amountField.getText());
+            double amountInUserCurrency = Double.parseDouble(amountField.getText()); //amount before converted to USD
+            double amount = currencyController.convertToUSD(amountInUserCurrency); //converted to USD before storing in database
 
             DepositRecord newDeposit = new DepositRecord(
                     LocalDate.now(),
@@ -108,18 +111,24 @@ public class DepositController {
 
     private Pane createDepositCard(DepositRecord deposit) {
         VBox card = new VBox(5);
+        card.getStyleClass().add("deposit-card"); //added class for styling
         card.setPadding(new Insets(10));
-        card.setStyle("-fx-background-color: white; -fx-border-radius: 5; " +
-                "-fx-background-radius: 5; -fx-border-color: #e0e0e0;");
+        //commented out background color so that it would not overwrite the dark theme color
+        card.setStyle("/*-fx-background-color: white;*/ -fx-border-radius: 5; " +
+                "-fx-background-radius: 5; /*-fx-border-color: #e0e0e0;*/");
         card.setPrefWidth(200);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
         String dateStr = deposit.date.format(formatter);
 
         Text titleText = new Text("Deposit " + dateStr);
-        Text amountText = new Text(String.format("$%.2f", deposit.amount));
-        amountText.setFill(Color.GREEN);
+        String convertedAmount = currencyController.convertCurrencyWithFormat(deposit.amount); //converts amount without formatting since formatting gets applied in next line
+        //Text amountText = new Text(String.format("$%.2f", convertedAmount)); //second parameter is the converted amount.  the amount in the currency that the user selected in settings
+        Text amountText = new Text(convertedAmount); //text with currency symbol and value. ex $150 or €150
+        //removed green fill color for amountText. I instead added class to be styles in stylesheet
+        amountText.getStyleClass().add("amount-text"); //added class for styling
         Text accountText = new Text(deposit.accountType);
+        accountText.getStyleClass().add("account-text");//added class for styling
 
         card.getChildren().addAll(titleText, amountText, accountText);
 
