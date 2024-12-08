@@ -62,7 +62,7 @@ public class SettingsController {
         setThemeCircleIndicator();
 
         ObservableList<String> currencies = FXCollections.observableArrayList(
-                "USD", "EUR", "GBP", "JPY", "AUD", "CAD"
+                "USD", "EUR", "JPY"
         );
 
         currencyMenu.setItems(currencies);

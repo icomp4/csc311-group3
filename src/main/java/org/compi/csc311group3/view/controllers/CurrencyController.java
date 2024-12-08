@@ -12,8 +12,10 @@ public class CurrencyController {
     private double multiplier = 1; //default multiplier
 
     //exchange rates
-    double EurExchangeRate = .95; //this is how much one euro is worth in USD
     double UsdExchangeRate = 1.00; //this is how much one USD is worth in USD
+    double EurExchangeRate = .95; //this is how much one euro is worth in USD
+    double JpyExchangeRate = .0067; //this is how much one Yen is worth in USD
+
 
     public CurrencyController() {
         this.currencyType = currencyType;
@@ -37,6 +39,11 @@ public class CurrencyController {
         if(currencyType.equals("USD"))
         {
             multiplier = UsdExchangeRate;
+            returnValue = value * multiplier;
+        }
+        if(currencyType.equals("JPY"))
+        {
+            multiplier = JpyExchangeRate;
             returnValue = value * multiplier;
         }
 
@@ -66,6 +73,14 @@ public class CurrencyController {
             formatedWithSymbol = "$" + formatedDecimalPlaces;
 
         }
+        if(currencyType.equals("JPY"))
+        {
+            multiplier = JpyExchangeRate;
+            double convertedValue =  value * multiplier;
+            String formatedDecimalPlaces = String.format("%.2f", convertedValue);
+            formatedWithSymbol = "¥" + formatedDecimalPlaces;
+
+        }
 
         return formatedWithSymbol;
     }
@@ -80,6 +95,11 @@ public class CurrencyController {
         }
         if(currencyType.equals("USD")){
             multiplier = UsdExchangeRate;
+            double convertedValue = value / multiplier;
+            returnValue = convertedValue;
+        }
+        if(currencyType.equals("JPY")){
+            multiplier = JpyExchangeRate;
             double convertedValue = value / multiplier;
             returnValue = convertedValue;
         }
