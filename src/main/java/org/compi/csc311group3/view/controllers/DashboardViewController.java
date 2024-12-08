@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -49,6 +51,8 @@ public class DashboardViewController implements Runnable{
     private BarChart<String, Number> barChart;
     private DepositService depositService;
 
+    @FXML
+    private NumberAxis yAxis;
 
 
     public void initialize() {
@@ -84,6 +88,9 @@ public class DashboardViewController implements Runnable{
         /***** Bar chart code - start *****/
 
         barChart.legendVisibleProperty().setValue(false); //hides legend on bar chart
+
+        yAxis.setLabel(currentCurrency); //sets the y-axis label to the current currency
+
 
         XYChart.Series set1 = new XYChart.Series<>();
 
