@@ -11,6 +11,7 @@ import org.compi.csc311group3.model.Deposit;
 import org.compi.csc311group3.service.DepositService;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,25 +33,39 @@ public class DepositController {
     @FXML private Pane midSection;
     @FXML private Button settingsLink;
     @FXML private ScrollPane scrollPane;
+    @FXML private Label savingsMonth;
+    @FXML private Label savingsWeek;
+    @FXML private Label savingsYear;
+    @FXML private Label checkingMonth;
+    @FXML private Label checkingWeek;
+    @FXML private Label checkingYear;
 
     private HBox depositCardsContainer;
     private List<DepositRecord> depositHistory;
     private DepositService depositService;
 
     public void initialize() {
-        accountSelector.getItems().addAll("Checking", "Savings");
-        depositHistory = new ArrayList<>();
-
         depositCardsContainer = new HBox(10);
         depositCardsContainer.setPadding(new Insets(10));
+        depositService = new DepositService();
+        depositHistory = new ArrayList<>();
 
         scrollPane.setContent(depositCardsContainer);
         scrollPane.setFitToHeight(true);
         scrollPane.setPannable(true);
-        depositService = new DepositService();
 
-        ProgressIndicator loadingIndicator = new ProgressIndicator();
-        depositCardsContainer.getChildren().add(loadingIndicator);
+        accountSelector.setValue("Choose Account");
+        accountSelector.getItems().addAll("Checking", "Savings");
+
+        ProgressIndicator cardsLoadingIndicator = new ProgressIndicator();
+        depositCardsContainer.getChildren().add(cardsLoadingIndicator);
+
+        checkingWeek.setText("Loading...");
+        checkingMonth.setText("Loading...");
+        checkingYear.setText("Loading...");
+        savingsWeek.setText("Loading...");
+        savingsMonth.setText("Loading...");
+        savingsYear.setText("Loading...");
 
         Thread depositLoader = new Thread(() -> {
             List<Deposit> deposits = depositService.getDeposits();
@@ -71,14 +86,21 @@ public class DepositController {
             });
         });
 
+        Thread statsLoader = new Thread(() -> {
+            updateDepositStats();
+        });
+
         depositLoader.setDaemon(true);
+        statsLoader.setDaemon(true);
+
         depositLoader.start();
+        statsLoader.start();
     }
 
     @FXML
     void addDeposit(ActionEvent event) {
         try {
-            if (accountSelector.getValue() == null || amountField.getText().isEmpty()) {
+            if (accountSelector.getValue() == null || amountField.getText().isEmpty() || accountSelector.getValue().equals("Choose Account")) {
                 showAlert("Error", "Please fill in all fields");
                 return;
             }
@@ -101,6 +123,7 @@ public class DepositController {
             Pane newCard = createDepositCard(newDeposit);
             depositCardsContainer.getChildren().add(0, newCard);
 
+            updateDepositStats();
             amountField.clear();
             accountSelector.setValue(null);
 
@@ -166,6 +189,65 @@ public class DepositController {
             this.amount = amount;
             this.accountType = accountType;
         }
+    }
+
+    private void updateDepositStats() {
+        LocalDate now = LocalDate.now();
+        LocalDate weekAgo = now.minusWeeks(1);
+        LocalDate monthAgo = now.minusMonths(1);
+        LocalDate yearAgo = now.minusYears(1);
+
+        List<Deposit> deposits = depositService.getDeposits();
+
+        BigDecimal checkingWeekTotal = BigDecimal.ZERO;
+        BigDecimal checkingMonthTotal = BigDecimal.ZERO;
+        BigDecimal checkingYearTotal = BigDecimal.ZERO;
+        BigDecimal savingsWeekTotal = BigDecimal.ZERO;
+        BigDecimal savingsMonthTotal = BigDecimal.ZERO;
+        BigDecimal savingsYearTotal = BigDecimal.ZERO;
+
+        for (Deposit deposit : deposits) {
+            LocalDate depositDate = deposit.getDateTime().toLocalDateTime().toLocalDate();
+            BigDecimal amount = BigDecimal.valueOf(deposit.getAmount());
+
+            if (deposit.getAccount().equalsIgnoreCase("checking")) {
+                if (depositDate.isAfter(weekAgo)) {
+                    checkingWeekTotal = checkingWeekTotal.add(amount);
+                }
+                if (depositDate.isAfter(monthAgo)) {
+                    checkingMonthTotal = checkingMonthTotal.add(amount);
+                }
+                if (depositDate.isAfter(yearAgo)) {
+                    checkingYearTotal = checkingYearTotal.add(amount);
+                }
+            } else if (deposit.getAccount().equalsIgnoreCase("savings")) {
+                if (depositDate.isAfter(weekAgo)) {
+                    savingsWeekTotal = savingsWeekTotal.add(amount);
+                }
+                if (depositDate.isAfter(monthAgo)) {
+                    savingsMonthTotal = savingsMonthTotal.add(amount);
+                }
+                if (depositDate.isAfter(yearAgo)) {
+                    savingsYearTotal = savingsYearTotal.add(amount);
+                }
+            }
+        }
+
+        BigDecimal finalCheckingWeekTotal = checkingWeekTotal;
+        BigDecimal finalCheckingMonthTotal = checkingMonthTotal;
+        BigDecimal finalCheckingYearTotal = checkingYearTotal;
+        BigDecimal finalSavingsWeekTotal = savingsWeekTotal;
+        BigDecimal finalSavingsMonthTotal = savingsMonthTotal;
+        BigDecimal finalSavingsYearTotal = savingsYearTotal;
+        javafx.application.Platform.runLater(() -> {
+            checkingWeek.setText(currencyController.convertCurrencyWithFormat(finalCheckingWeekTotal.doubleValue()));
+            checkingMonth.setText(currencyController.convertCurrencyWithFormat(finalCheckingMonthTotal.doubleValue()));
+            checkingYear.setText(currencyController.convertCurrencyWithFormat(finalCheckingYearTotal.doubleValue()));
+
+            savingsWeek.setText(currencyController.convertCurrencyWithFormat(finalSavingsWeekTotal.doubleValue()));
+            savingsMonth.setText(currencyController.convertCurrencyWithFormat(finalSavingsMonthTotal.doubleValue()));
+            savingsYear.setText(currencyController.convertCurrencyWithFormat(finalSavingsYearTotal.doubleValue()));
+        });
     }
 
     @FXML void addDepositLinkClicked(ActionEvent event) throws IOException {
