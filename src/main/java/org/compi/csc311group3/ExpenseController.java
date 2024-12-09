@@ -1,7 +1,9 @@
 package org.compi.csc311group3;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,9 +26,16 @@ import java.util.List;
 
 import static org.compi.csc311group3.view.controllers.SettingsController.currencyController; //import currencyController instance from settings
 
+/**
+ * A controller class for managing the UI
+ * Handles functions such as adding, editing, deleting, and creating new categories
+ */
 public class ExpenseController {
 
 
+    /**
+     * Expense UI declarations
+     * */
     public Button dashboardLink;
     public Button analyticsLink;
     public Button addExpenseLink;
@@ -67,6 +76,12 @@ public class ExpenseController {
     private final DbConnection dbConnection = new DbConnection();
     private final ExpenseDAO expenseDAO = new ExpenseDAO();
 
+    /**
+     * Initializes the expense controller, sets up the table view and buttons
+     * Populates the category combo box and sets cell factories
+     * @throws SQLException If a database access error occurs
+     * @throws ClassNotFoundException If the database driver class is not found
+     */
     public void initialize() throws SQLException, ClassNotFoundException {
 
         Connection conn = dbConnection.getConnection();
@@ -89,6 +104,11 @@ public class ExpenseController {
     }
 
 
+    /**
+     * Adds a new expense object to the database
+     * Validates the input fields
+     * Displays errors alerts if validation fails
+     */
     public void addExpense() {
         LocalDateTime date_time = dateTimeField.getValue() != null ? dateTimeField.getValue().atStartOfDay() : null;
         String description = descriptionField.getText();
@@ -121,6 +141,11 @@ public class ExpenseController {
         }
     }
 
+    /**
+     * Edits an existing expense in the database.
+     * Updates the selected expense with new values entered by the user
+     * Validates inputs
+     */
     public void editExpense(){
         Expense selectedExpense = expenseTableView.getSelectionModel().getSelectedItem();
         if(selectedExpense != null){
@@ -156,6 +181,10 @@ public class ExpenseController {
         }
     }
 
+    /**
+     * Displays an error alert with the specified message
+     * @param message The specified message to display in the alert
+     */
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -164,6 +193,11 @@ public class ExpenseController {
         alert.showAndWait();
     }
 
+    /**
+     * Deletes the selected expense from the database
+     * Prompts the user to confirm
+     * Displays error alerts if an expense isn't selected or an error occurs during deletion
+     */
     private void deleteExpense(){
         Expense selectedExpense = expenseTableView.getSelectionModel().getSelectedItem();
         if(selectedExpense != null){
@@ -177,6 +211,10 @@ public class ExpenseController {
         }
     }
 
+    /**
+     * Creates a new expense category
+     * Checks for duplicate categories
+     */
     private void createNewCategory(){
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("New category");
@@ -198,6 +236,9 @@ public class ExpenseController {
         });
     }
 
+    /**
+     * Clears all the input fields
+     */
     private void clearFields(){
         descriptionField.clear();
         categoryComboBox.getSelectionModel().clearSelection();
@@ -205,6 +246,11 @@ public class ExpenseController {
         dateTimeField.setValue(null);
     }
 
+    /**
+     * Loads expenses from the database and populates the table view
+     * Converts the amounts to the correct current currency using the currency controller
+     * Displays an error if there is an issue getting the expenses from the database
+     */
     private void loadExpenses(){
         try{
             List<Expense> expenseList = expenseDAO.getAllExpenses();
@@ -221,6 +267,8 @@ public class ExpenseController {
             e.printStackTrace();
         }
     }
+
+
     @FXML
     void dashboardLinkClicked(ActionEvent event) throws IOException {
         ChangeScreen("dashboard-view.fxml", 850, 560, dashboardLink);
@@ -244,6 +292,4 @@ public class ExpenseController {
     void settingsLinkClicked(ActionEvent event) throws IOException {
         ChangeScreen("settings.fxml", 850, 560, settingsLink);
     }
-
-
 }
