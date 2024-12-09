@@ -5,16 +5,26 @@ import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.compi.csc311group3.Expense;
+import org.compi.csc311group3.database.ExpenseDAO;
 import org.compi.csc311group3.model.Deposit;
 import org.compi.csc311group3.service.DepositService;
+import org.compi.csc311group3.service.ExpensesWithTotal;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
-
+import java.util.Map;
 
 import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 
@@ -22,6 +32,7 @@ import static org.compi.csc311group3.view.controllers.SettingsController.currenc
 
 public class DashboardViewController implements Runnable{
 
+    ExpenseDAO expenseDAO = new ExpenseDAO(); //used to access expense info for dashboard
 
     @FXML
     private Text totalBalanceText;
@@ -49,9 +60,16 @@ public class DashboardViewController implements Runnable{
     private BarChart<String, Number> barChart;
     private DepositService depositService;
 
+    @FXML
+    private NumberAxis yAxis;
+
+    @FXML
+    private VBox recentExpensesContainer;
 
 
-    public void initialize() {
+    public void initialize() throws SQLException, ClassNotFoundException {
+
+        addRecentExpensesToDashboard(); //add recent expenses to the recentExpensesContainer
 
         //assign data from DB to these variables
         double balance = 3000;
@@ -63,8 +81,13 @@ public class DashboardViewController implements Runnable{
         System.out.println("current currency: " + currentCurrency);
         System.out.println();
 
+        ExpensesWithTotal expensesBundle = expenseDAO.getAllExpensesInAnObject();
+        double totalExpenses = expensesBundle.getTotalExpenseAmount();
+        Map dailyExpenses = expensesBundle.getDailyExpenses(); //contains users daily expenses for past week
+        System.out.println("daily expenses" + dailyExpenses.toString());
+
         String balanceFormated = currencyController.convertCurrencyWithFormat(balance);
-        String expensesFormated = currencyController.convertCurrencyWithFormat(expenses);
+        String expensesFormated = currencyController.convertCurrencyWithFormat(totalExpenses);
         String monthlyBudgetFormated = currencyController.convertCurrencyWithFormat(monthlyBudget);
         String savingsFormatted = currencyController.convertCurrencyWithFormat(savings);
 
@@ -83,7 +106,10 @@ public class DashboardViewController implements Runnable{
 
         /***** Bar chart code - start *****/
 
-        barChart.legendVisibleProperty().setValue(false); //hides legend on bar chart
+        /*barChart.legendVisibleProperty().setValue(false); //hides legend on bar chart
+
+        yAxis.setLabel(currentCurrency); //sets the y-axis label to the current currency
+
 
         XYChart.Series set1 = new XYChart.Series<>();
 
@@ -107,8 +133,31 @@ public class DashboardViewController implements Runnable{
 
 
         barChart.getData().addAll(set1);//adds data to barChart
+
+
+        /***** Bar chart code - end *****/
+
         depositService = new DepositService();
         calculateBalances();
+
+        /***** Bar chart code - start *****/
+
+        barChart.legendVisibleProperty().setValue(false);
+
+        List<Expense> expensesList = expensesBundle.getExpenses(); //list of expenses
+        yAxis.setLabel(currentCurrency); //set the y-axis to the current currency
+        barChart.getData().clear(); //remove any existing data from the bar chart
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName(currentCurrency);
+
+        //loop through the expenses and add each one to the chart
+        for(Expense expense : expensesList) {
+            String description = expense.getCategory(); //user expense category
+            double amount = expense.getAmount();
+            series.getData().add(new XYChart.Data<>(description, amount));
+        }
+
+        barChart.getData().add(series);
 
         /***** Bar chart code - end *****/
 
@@ -196,8 +245,9 @@ public class DashboardViewController implements Runnable{
     /**
      * This method is used to calculate the total balance and savings and display them on the dashboard
      * TODO: Incorporate the expenses into the calculation
+     * //the above todo is now complete
      */
-    private void calculateBalances(){
+    private void calculateBalances() throws SQLException, ClassNotFoundException {
         List<Deposit> deposits = depositService.getDeposits();
         double savings = 0;
         double checking = 0;
@@ -208,7 +258,57 @@ public class DashboardViewController implements Runnable{
                 checking += deposit.getAmount();
             }
         }
-        totalBalanceText.setText("$" + (savings + checking));
-        savingsText.setText("$" + savings);
+
+        ExpensesWithTotal expenseBundle = expenseDAO.getAllExpensesInAnObject(); //holds information about all users expenses
+        double totalExpenses = expenseBundle.getTotalExpenseAmount(); //total expenses calculated
+        double totalBalance = (savings + checking) - totalExpenses;
+
+        totalBalanceText.setText(currencyController.convertCurrencyWithFormat(totalBalance)); //display balance with proper currency unit
+        savingsText.setText(currencyController.convertCurrencyWithFormat(savings)); //display savings with proper currency unit
     }
+
+
+    private void addRecentExpensesToDashboard() throws SQLException, ClassNotFoundException {
+
+        ExpensesWithTotal expenseBundle = expenseDAO.getAllExpensesInAnObject();
+        List<Expense> expenseList = expenseBundle.getExpenses(); //gets list of all expenses
+
+        recentExpensesContainer.getChildren().clear(); //clear container before adding new things
+
+        recentExpensesContainer.setSpacing(5); //spacing between items in the container
+
+
+        expenseList.sort(Comparator.comparing(Expense::getDate_time).reversed()); //sort expenseList based on date
+
+        //loop through the top 5 recent expenses or fewer if there are less than 5
+        int count = Math.min(6, expenseList.size());  //ensure we don't exceed the list size
+        for (int i = 0; i < count; i++) {
+            Expense expense = expenseList.get(i);
+
+            //create a VBox for each expense
+            VBox expenseVBox = new VBox(1); // 1 is the spacing between elements inside the VBox
+
+            //dateTimeFormatter to format the date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+            //create labels to display expense details
+            Label descriptionLabel = new Label(String.valueOf(expense.getDescription()));
+            Label dateLabel = new Label(expense.getDate_time().toLocalDate().format(formatter)); //date formatted as MM/dd/yyyy
+            Label amountLabel = new Label(currencyController.convertCurrencyWithFormat(expense.getAmount()));
+
+            //styles for labels
+            descriptionLabel.setStyle("-fx-font-weight: bold;");
+            amountLabel.setStyle("-fx-text-fill: red;");
+
+            //add the labels to the VBox
+            expenseVBox.getChildren().addAll(dateLabel, descriptionLabel, amountLabel); //order matters
+
+            //add some style for the expenseVBox
+            expenseVBox.setStyle("-fx-background-color: transparent; -fx-padding: 5 0 5 0; -fx-border-color: transparent transparent #c5c5c5 transparent; -fx-border-radius: 0px; -fx-background-radius: 0px");
+            //add the VBox to the container
+            recentExpensesContainer.getChildren().add(expenseVBox);
+        }
+
+    }
+
 }

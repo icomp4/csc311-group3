@@ -142,7 +142,7 @@ Circle {
 
 #currencyMenu.combo-box .list-cell:hover,
 #accountSelector.combo-box .list-cell:hover {
-    -fx-background-color: rgba(0, 122, 255, 0);
+    -fx-background-color: grey;
     -fx-text-fill: #FFFFFF;
 }
 
@@ -449,9 +449,9 @@ Circle {
     -fx-prompt-text-fill: #8E8E93;
 }
 
-
-
-
+#recentExpensesLine {
+    -fx-stroke: white;
+}
 
 
 
