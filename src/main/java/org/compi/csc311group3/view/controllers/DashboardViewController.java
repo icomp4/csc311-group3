@@ -92,6 +92,9 @@ public class DashboardViewController implements Runnable{
         String savingsFormatted = currencyController.convertCurrencyWithFormat(savings);
 
 
+        expensesText.setStyle("-fx-fill: red"); //expenses should always be red
+        monthlyBudgetText.setStyle("-fx-fill: #00be00"); //budget should always be green
+
 
         //sets text to assigned values
         //totalBalanceText.setText("$" + balance);
@@ -259,6 +262,25 @@ public class DashboardViewController implements Runnable{
         ExpensesWithTotal expenseBundle = expenseDAO.getAllExpensesInAnObject(); //holds information about all users expenses
         double totalExpenses = expenseBundle.getTotalExpenseAmount(); //total expenses calculated
         double totalBalance = (savings + checking) - totalExpenses;
+
+        //change color of text based on positive or negative
+        if(totalBalance > 0){
+            totalBalanceText.setStyle("-fx-fill: #00be00");
+        }
+        if(totalBalance < 0){
+            totalBalanceText.setStyle("-fx-fill: red");
+        }
+
+        if(savings > 0){
+            savingsText.setStyle("-fx-fill: #00be00");
+        }
+        if(savings < 0){
+            savingsText.setStyle("-fx-fill: red");
+        }
+
+
+
+
 
         totalBalanceText.setText(currencyController.convertCurrencyWithFormat(totalBalance)); //display balance with proper currency unit
         savingsText.setText(currencyController.convertCurrencyWithFormat(savings)); //display savings with proper currency unit
