@@ -16,12 +16,6 @@
 - Todos are posted on the project, from where any member can claim any todo
 - We all work on both front and backend, which allows for every member to be involved on both parts of the stack
 
-# Where we are:
-- We have implemented 6 out of the 7 frontend pages we have planned
-- Created the database
-- User backend functionality (sign up, login)
-- Expense backend functionality (full CRUD)
-
 # What we need to do:
 - Finish backend logic for deposits, and connect it to the frontend
 - Finish backend logic for the dashboard
