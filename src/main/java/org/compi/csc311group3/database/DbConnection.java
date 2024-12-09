@@ -27,7 +27,7 @@ public class DbConnection {
         return conn;
     }
 
-    private void initializeTables(Connection conn) throws SQLException {
+    public void initializeTables(Connection conn) throws SQLException {
 
         // Method to initialize the user table
         String createUsersTable = """

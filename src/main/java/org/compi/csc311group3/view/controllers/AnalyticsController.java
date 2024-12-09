@@ -2,8 +2,10 @@ package org.compi.csc311group3.view.controllers;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -15,7 +17,6 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import org.compi.csc311group3.database.AnalyticsDAO;
 import org.compi.csc311group3.database.DbConnection;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,6 +24,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller class for managing the analytics page
+ * Handles user interaction, report generation, and data virtualization
+ */
 public class AnalyticsController {
 
     @FXML
@@ -32,13 +37,18 @@ public class AnalyticsController {
     private ComboBox<String> expenseComboBox;
 
     @FXML
-    private Button totalExpenseButton, compareExpenseButton, numberOfEntriesButton, categoryAnalysisButton, clearButton;
+    private Button totalExpenseButton, compareExpenseButton, numberOfEntriesButton, categoryAnalysisButton, clearButton, printButton;
 
     @FXML
     private Pane reportDisplayPane;
 
     private AnalyticsDAO analyticsDAO;
 
+    /**
+     * Initializes the analytics controller
+     * Sets up field listeners, populates data, and disables buttons based on current state
+     * Method is called automatically when loading the FXML file
+     */
     public void initialize() {
 
         period1End.setDisable(true);
@@ -49,6 +59,7 @@ public class AnalyticsController {
         compareExpenseButton.setDisable(true);
         numberOfEntriesButton.setDisable(true);
         categoryAnalysisButton.setDisable(true);
+        printButton.setDisable(true);
 
         setupFieldListeners();
 
@@ -63,8 +74,14 @@ public class AnalyticsController {
         }
 
         updateButtonStates();
+        setupReportGeneratedListeners();
     }
 
+    /**
+     * Calculates the total expense for the selected category and time period
+     * Displays the total expense in the report pane with a line by line break down
+     * Outputs an error if the data is invalid
+     */
     @FXML
     private void calculateTotalExpense(){
         try{
@@ -97,6 +114,10 @@ public class AnalyticsController {
         }
     }
 
+    /**
+     * Compares an expense between two time periods for the selected category
+     * Displays the comparison report with the detailed breakdown and differences
+     */
     @FXML
     private void compareExpense(){
         try{
@@ -151,29 +172,10 @@ public class AnalyticsController {
         }
     }
 
-    @FXML
-    private void calculateNumberOfEntries(){
-        try{
-            String category = getSelectedCategory();
-            if(category == null){
-                return;
-            }
-
-            Timestamp startDate = getTimestampFromDatePicker(period1Start);
-            Timestamp endDate = getTimestampFromDatePicker(period1End);
-
-            if(startDate == null || endDate == null){
-                return;
-            }
-
-            int count = analyticsDAO.getNumberOfEntries(category, startDate, endDate);
-            displayReport("Number of entries for " + category + ": " + count);
-        } catch (Exception e) {
-            displayError("Error calculating number of entries.");
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Generates a line graph of expense entries over time for the selected category
+     * Displays the graph in the report pane
+     */
     @FXML
     private void showEntriesGraph(){
         String category = expenseComboBox.getValue();
@@ -215,8 +217,11 @@ public class AnalyticsController {
         }
     }
 
-
-
+    /**
+     * Generates and displays a bar chart for expense analysis by category
+     * Gets the category data between the selected start and end dates, then plots data on a Barchart
+     * Displays an error message if any errors occur during data retrieval or creating the chart
+     */
     @FXML
     private void calculateCategoryAnalysis(){
         try {
@@ -248,6 +253,11 @@ public class AnalyticsController {
         }
     }
 
+    /**
+     * Clears all inputs and resets the report display pane
+     * Clears the combo box, clears date pickers, and will clear any reports
+     * Disables buttons that require input until the necessary inputs are re-entered
+     */
     @FXML
     private void handleClear(){
         expenseComboBox.getSelectionModel().clearSelection();
@@ -255,6 +265,8 @@ public class AnalyticsController {
         period1End.setValue(null);
         period2Start.setValue(null);
         period2End.setValue(null);
+
+        reportDisplayPane.getChildren().clear();
 
         expenseComboBox.setDisable(false);
         period1Start.setDisable(false);
@@ -266,8 +278,50 @@ public class AnalyticsController {
         compareExpenseButton.setDisable(true);
         numberOfEntriesButton.setDisable(true);
         categoryAnalysisButton.setDisable(true);
+        printButton.setDisable(true);
     }
 
+    /**
+     * Prints the currently displayed report in the display pane
+     * Notifies the user if the print job fails
+     * @param event The action event triggered by the button
+     */
+    @FXML
+    private void handlePrintReport(ActionEvent event){
+        if(reportDisplayPane.getChildren().isEmpty()){
+            displayError("No report available");
+            return;
+        }
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+        if(printerJob  != null && printerJob.showPrintDialog(reportDisplayPane.getScene().getWindow())){
+            Node reportContent = reportDisplayPane.getChildren().get(0);
+            double originalWidth = reportContent.getBoundsInParent().getWidth();
+            double originalHeight = reportContent.getBoundsInParent().getHeight();
+            double scaleFactor = Math.min(
+                    printerJob.getJobSettings().getPageLayout().getPrintableWidth() / originalWidth,
+                    printerJob.getJobSettings().getPageLayout().getPrintableHeight() / originalHeight
+            );
+
+            reportContent.setScaleX(scaleFactor);
+            reportContent.setScaleY(scaleFactor);
+
+            boolean success = printerJob.printPage(reportContent);
+
+            reportContent.setScaleX(1.0);
+            reportContent.setScaleY(1.0);
+
+            if(success){
+                printerJob.endJob();
+            } else {
+                displayError("Failed to print report");
+            }
+        }
+    }
+
+    /**
+     * Gets the selected category from the combo box
+     * @return The selected category as a String, or null if none is selected
+     */
     private String getSelectedCategory(){
         String category = expenseComboBox.getValue();
         if(category == null || category.isEmpty()){
@@ -277,6 +331,11 @@ public class AnalyticsController {
         return category;
     }
 
+    /**
+     * Converts the value selected in the Date picker into a Timestamp
+     * @param datePicker The date picker to retrieve the date from
+     * @return A Timestamp representing the selected date
+     */
     private Timestamp getTimestampFromDatePicker(DatePicker datePicker){
         if(datePicker.getValue() == null){
             displayError("PLease select a valid date.");
@@ -285,6 +344,11 @@ public class AnalyticsController {
         return Timestamp.valueOf(datePicker.getValue().atStartOfDay());
     }
 
+    /**
+     * Displays a simple text report in the display pane
+     * Clears any existing report int the display pane
+     * @param content The text to display in the pane
+     */
     private void displayReport(String content){
         reportDisplayPane.getChildren().clear();
         Text report = new Text(content);
@@ -292,6 +356,11 @@ public class AnalyticsController {
         reportDisplayPane.getChildren().add(report);
     }
 
+    /**
+     * Displays a line chart in the display pane
+     * Clears any existing report int the display pane
+     * @param content The node/chart to be displayed
+     */
     private void displayLineReport(Node content){
         reportDisplayPane.getChildren().clear();
         reportDisplayPane.getChildren().add(content);
@@ -306,10 +375,20 @@ public class AnalyticsController {
         }
     }
 
+    /**
+     * Displays an error message to the user
+     * @param errorMessage The error message to be displayed
+     */
     private void displayError(String errorMessage){
         displayReport("Error: " + errorMessage);
     }
 
+    /**
+     * Displays a table view containing the provided expense data in the report display pane
+     * @param expenses A list of the expense data to be displayed in the table
+     *                 Each entry is a map with keys
+     * @param totalExpense The total amount of expenses shown in a summary row
+     */
     private void displayExpensesInTable(List<Map<String, Object>> expenses, double totalExpense){
         reportDisplayPane.getChildren().clear();
 
@@ -420,6 +499,10 @@ public class AnalyticsController {
         reportDisplayPane.getChildren().add(tableContainer);
     }
 
+    /**
+     * Sets up listeners for the field inputs
+     * Enables or disables buttons based on input state and validates fields
+     */
     private void setupFieldListeners(){
 
         expenseComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -457,6 +540,12 @@ public class AnalyticsController {
         });
     }
 
+    /**
+     * Returns a callback to restrict available dates in the date picker
+     * @param minDate The minimum selectable date
+     * @param maxDate The maximum selectable date
+     * @return A callback for date restrictions in the date picker
+     */
     private Callback<DatePicker, DateCell> getDateRestrictionsFactory(LocalDate minDate, LocalDate maxDate) {
         return new Callback<DatePicker, DateCell>() {
             @Override
@@ -475,6 +564,10 @@ public class AnalyticsController {
         };
     }
 
+    /**
+     * Updates the enabled/disabled states of the action buttons based on the input fields
+     * Ensures that buttons are only enabled when all required fields are filled
+     */
     private void updateButtonStates(){
         boolean isExpenseSelected = expenseComboBox.getSelectionModel().getSelectedItem() != null;
         boolean isPeriod1StartSelected = period1Start.getValue() != null;
@@ -497,5 +590,32 @@ public class AnalyticsController {
         compareExpenseButton.setDisable(
                 !(isExpenseSelected && isPeriod1StartSelected && isPeriod1EndSelected && isPeriod2StartSelected && isPeriod2EndSelected)
         );
+
+    }
+
+    private void setupReportGeneratedListeners(){
+        totalExpenseButton.setOnAction(event -> {
+            calculateTotalExpense();
+            enablePrintButton();
+        });
+
+        compareExpenseButton.setOnAction(event -> {
+            compareExpense();
+            enablePrintButton();
+        });
+
+        numberOfEntriesButton.setOnAction(event -> {
+            showEntriesGraph();
+            enablePrintButton();
+        });
+
+        categoryAnalysisButton.setOnAction(event -> {
+            calculateCategoryAnalysis();
+            enablePrintButton();
+        });
+    }
+
+    private void enablePrintButton(){
+        printButton.setDisable(false);
     }
 }

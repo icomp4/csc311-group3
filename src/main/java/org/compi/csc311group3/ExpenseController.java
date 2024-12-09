@@ -68,7 +68,9 @@ public class ExpenseController {
     private final ExpenseDAO expenseDAO = new ExpenseDAO();
 
     public void initialize() throws SQLException, ClassNotFoundException {
-        expenseDAO.initialize();
+
+        Connection conn = dbConnection.getConnection();
+        dbConnection.initializeTables(conn);
         loadExpenses();
 
         List<String> categoryList = expenseDAO.getUniqueCategories();
