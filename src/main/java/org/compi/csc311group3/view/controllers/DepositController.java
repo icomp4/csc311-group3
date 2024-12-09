@@ -21,6 +21,10 @@ import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 
 import static org.compi.csc311group3.view.controllers.SettingsController.currencyController;//import currencyController instance from settings
 
+/**
+ * The DepositController class is responsible for managing the UI for the deposit screen
+ * It features logic for handling user input regarding creating deposits, as well as pulling deposit history from the database
+ */
 public class DepositController {
     @FXML private ChoiceBox<String> accountSelector;
     @FXML private Button addDepositLink;
@@ -44,6 +48,10 @@ public class DepositController {
     private List<DepositRecord> depositHistory;
     private DepositService depositService;
 
+    /**
+     * The initialize function is called on page load
+     * it is responsible for initializing the scrollpane, choicebox, and spawning threads to fetch data from the db
+     */
     public void initialize() {
         depositCardsContainer = new HBox(10);
         depositCardsContainer.setPadding(new Insets(10));
@@ -97,6 +105,9 @@ public class DepositController {
         statsLoader.start();
     }
 
+    /**
+     * Updates the deposit scrollPane, then attempts to add the deposit to the database
+     */
     @FXML
     void addDeposit(ActionEvent event) {
         try {
@@ -132,6 +143,11 @@ public class DepositController {
         }
     }
 
+    /**
+     * Takes a deposit and models it as a card to be displayed on the UI
+     * @param deposit the deposit data
+     * @return the card with the deposit info
+     */
     private Pane createDepositCard(DepositRecord deposit) {
         VBox card = new VBox(5);
         card.getStyleClass().add("deposit-card"); //added class for styling
@@ -158,6 +174,11 @@ public class DepositController {
         return card;
     }
 
+    /**
+     * Displays an error alert
+     * @param title the title of the alert
+     * @param content the content of the alert
+     */
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -165,20 +186,10 @@ public class DepositController {
         alert.showAndWait();
     }
 
-    private void addExistingData() {
-        List<Deposit> deposits = depositService.getDeposits();
-        for (Deposit deposit : deposits) {
-            DepositRecord record = new DepositRecord(
-                    LocalDate.now(),
-                    deposit.getAmount(),
-                    deposit.getAccount()
-            );
-            depositHistory.add(record);
-            Pane card = createDepositCard(record);
-            depositCardsContainer.getChildren().add(card);
-        }
-    }
 
+    /**
+     * Helper data class to model a deposit
+     */
     private static class DepositRecord {
         LocalDate date;
         double amount;
@@ -191,6 +202,11 @@ public class DepositController {
         }
     }
 
+    /**
+     * This method fetches deposit data from the database, and updates the Deposit Statistic UI fields
+     * It categorizes deposits based on account, and timeframe
+     * It then sums them based on the criteria, and updates the label for the correlated field
+     */
     private void updateDepositStats() {
         LocalDate now = LocalDate.now();
         LocalDate weekAgo = now.minusWeeks(1);
@@ -249,6 +265,8 @@ public class DepositController {
             savingsYear.setText(currencyController.convertCurrencyWithFormat(finalSavingsYearTotal.doubleValue()));
         });
     }
+
+    // Navigation links
 
     @FXML void addDepositLinkClicked(ActionEvent event) throws IOException {
         ChangeScreen("deposit-view.fxml", 850, 560, addDepositLink);

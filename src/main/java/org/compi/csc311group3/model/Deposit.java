@@ -2,6 +2,10 @@ package org.compi.csc311group3.model;
 
 import java.sql.Timestamp;
 
+/**
+ * Deposit class represents a deposit made by a user.
+ * This class is used to store deposit information in the database.
+ */
 public class Deposit {
     private int id;
     private String account;
