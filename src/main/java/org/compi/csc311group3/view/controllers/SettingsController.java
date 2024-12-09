@@ -124,10 +124,8 @@ public class SettingsController {
         ChangeScreen("dashboard-view.fxml", 850, 560, dashboardLink);
     }
     @FXML
-    void analyticsLinkClicked(ActionEvent event) {
-
-        // TODO: Implement functionality to navigate to analytics page
-
+    void analyticsLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("Analytics.fxml", 800, 600, analyticsLink);
     }
     @FXML
     void addExpenseLinkClicked(ActionEvent event) throws IOException {
