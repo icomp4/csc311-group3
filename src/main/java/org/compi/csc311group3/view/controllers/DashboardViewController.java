@@ -236,8 +236,9 @@ public class DashboardViewController implements Runnable{
     /**
      * This method is used to calculate the total balance and savings and display them on the dashboard
      * TODO: Incorporate the expenses into the calculation
+     * //the above todo is now complete
      */
-    private void calculateBalances(){
+    private void calculateBalances() throws SQLException, ClassNotFoundException {
         List<Deposit> deposits = depositService.getDeposits();
         double savings = 0;
         double checking = 0;
@@ -248,7 +249,12 @@ public class DashboardViewController implements Runnable{
                 checking += deposit.getAmount();
             }
         }
-        totalBalanceText.setText("$" + (savings + checking));
-        savingsText.setText("$" + savings);
+
+        ExpensesWithTotal expenseBundle = expenseDAO.getAllExpensesInAnObject(); //holds information about all users expenses
+        double totalExpenses = expenseBundle.getTotalExpenseAmount(); //total expenses calculated
+        double totalBalance = (savings + checking) - totalExpenses;
+
+        totalBalanceText.setText(currencyController.convertCurrencyWithFormat(totalBalance)); //display balance with proper currency unit
+        savingsText.setText(currencyController.convertCurrencyWithFormat(savings)); //display savings with proper currency unit
     }
 }
