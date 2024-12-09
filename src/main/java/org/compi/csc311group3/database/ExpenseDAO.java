@@ -16,7 +16,7 @@ public class ExpenseDAO {
 
 
     public List<Expense> getAllExpenses() throws SQLException, ClassNotFoundException {
-        String query = "SELECT * FROM expenses";
+        String query = "SELECT * FROM expenses ORDER BY date_time DESC";
         List<Expense> expenses = new ArrayList<>();
 
         try(Connection connection = dbConnection.getConnection();
@@ -113,39 +113,6 @@ public class ExpenseDAO {
             stmt.setString(1, category);
             stmt.executeUpdate();
         }
-    }
-
-    public void createTables(){
-        try (Connection connection = dbConnection.getConnection();
-        Statement stmt = connection.createStatement()){
-            String createExpenseTable = """
-                    CREATE TABLE IF NOT EXISTS expenses(
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    description TEXT,
-                    category VARCHAR(255) NOT NULL,
-                    amount DECIMAL(10, 2) NOT NULL
-                    );
-                    """;
-
-            String createCategoriesTables = """
-                   CREATE TABLE IF NOT EXISTS categories(
-                   id INT AUTO_INCREMENT PRIMARY KEY,
-                   name VARCHAR(255) UNIQUE NOT NULL
-                   );
-                   """;
-
-            stmt.execute(createExpenseTable);
-            stmt.execute(createCategoriesTables);
-        } catch (SQLException e){
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void initialize(){
-        createTables();
     }
 
     public double getExpenseForPeriod(LocalDate startDate, LocalDate endDate, String category) throws SQLException {

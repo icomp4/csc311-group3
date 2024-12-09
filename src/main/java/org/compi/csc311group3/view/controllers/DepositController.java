@@ -274,7 +274,9 @@ public class DepositController {
     @FXML void addExpenseLinkClicked(ActionEvent event) throws IOException {
         ChangeScreen("Expense.fxml", 850, 560, addExpenseLink);
     }
-    @FXML void analyticsLinkClicked(ActionEvent event) { }
+    @FXML void analyticsLinkClicked(ActionEvent event) throws IOException {
+        ChangeScreen("Analytics.fxml", 800, 600, analyticsLink);
+    }
     @FXML void dashboardLinkClicked(ActionEvent event) throws IOException {
         ChangeScreen("dashboard-view.fxml", 850, 560, dashboardLink);
     }

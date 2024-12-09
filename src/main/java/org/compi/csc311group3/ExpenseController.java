@@ -68,7 +68,9 @@ public class ExpenseController {
     private final ExpenseDAO expenseDAO = new ExpenseDAO();
 
     public void initialize() throws SQLException, ClassNotFoundException {
-        expenseDAO.initialize();
+
+        Connection conn = dbConnection.getConnection();
+        dbConnection.initializeTables(conn);
         loadExpenses();
 
         List<String> categoryList = expenseDAO.getUniqueCategories();
@@ -86,18 +88,6 @@ public class ExpenseController {
         newCategoryButton.setOnAction(e -> createNewCategory());
     }
 
-    /**
-    private void addExpense() {
-        String description = descriptionField.getText();
-        String category = categoryComboBox.getValue();
-        double amount = Double.parseDouble(amountField.getText());
-        LocalDateTime dateTime = dateTimeField.getValue().atStartOfDay();
-        Expense expense = new Expense(description, category, dateTime, amount);
-        expenses.add(expense);
-        userService.addExpense(expense.getAmount(),expense.getCategory(),expense.getDescription());
-        userService.printAllExpenses();
-        clearFields();
-    }*/
 
     public void addExpense() {
         LocalDateTime date_time = dateTimeField.getValue() != null ? dateTimeField.getValue().atStartOfDay() : null;
