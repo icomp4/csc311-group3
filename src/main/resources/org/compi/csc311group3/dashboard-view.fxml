@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -103,7 +104,7 @@
       </HBox>
       <Pane fx:id="midSection" layoutX="187.0" prefHeight="560.0" prefWidth="662.0">
          <children>
-            <Pane fx:id="balancePane" layoutX="52.0" layoutY="66.0" prefHeight="110.0" prefWidth="177.0">
+            <Pane fx:id="balancePane" layoutX="68.0" layoutY="62.0" prefHeight="110.0" prefWidth="177.0">
                <children>
                   <Text fx:id="totalBalanceText" layoutX="16.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$3,000">
                      <font>
@@ -118,7 +119,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="expensePane" layoutX="243.0" layoutY="66.0" prefHeight="110.0" prefWidth="177.0">
+            <Pane fx:id="expensePane" layoutX="259.0" layoutY="62.0" prefHeight="110.0" prefWidth="177.0">
                <children>
                   <Text fx:id="expensesText" layoutX="15.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$100">
                      <font>
@@ -133,7 +134,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="budgetPane" layoutX="52.0" layoutY="189.0" prefHeight="110.0" prefWidth="177.0">
+            <Pane fx:id="budgetPane" layoutX="68.0" layoutY="185.0" prefHeight="110.0" prefWidth="177.0">
                <children>
                   <Text fx:id="monthlyBudgetText" layoutX="16.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$2,000">
                      <font>
@@ -148,7 +149,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="savingsPane" layoutX="243.0" layoutY="189.0" prefHeight="110.0" prefWidth="177.0">
+            <Pane fx:id="savingsPane" layoutX="259.0" layoutY="185.0" prefHeight="110.0" prefWidth="177.0">
                <children>
                   <Text fx:id="savingsText" layoutX="15.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$1,000">
                      <font>
@@ -163,43 +164,14 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="recentExpensesPane" layoutX="434.0" layoutY="66.0" prefHeight="472.0" prefWidth="177.0" styleClass=".expenses">
-               <children>
-                  <Text layoutX="16.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recent Expenses">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
-                  <Pane layoutX="10.0" layoutY="68.0" prefHeight="29.0" prefWidth="157.0" styleClass="expenses">
-                     <children>
-                        <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Groceries $50" wrappingWidth="98.2800064086914" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="10.0" layoutY="106.0" prefHeight="29.0" prefWidth="157.0" styleClass="expenses">
-                     <children>
-                        <Text layoutX="11.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transportation $75" wrappingWidth="135.2800064086914" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="10.0" layoutY="145.0" prefHeight="29.0" prefWidth="157.0" styleClass="expenses">
-                     <children>
-                        <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Bill $60" wrappingWidth="135.2800064086914" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="10.0" layoutY="183.0" prefHeight="29.0" prefWidth="157.0" styleClass="expenses">
-                     <children>
-                        <Text layoutX="12.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subscriptions $50" wrappingWidth="127.9530029296875" />
-                     </children>
-                  </Pane>
-               </children>
-            </Pane>
-            <Text layoutX="52.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
+            <Text layoutX="68.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Text>
-            <BarChart fx:id="barChart" horizontalGridLinesVisible="false" layoutX="51.0" layoutY="308.0" prefHeight="230.0" prefWidth="368.0" title="Expenses" verticalGridLinesVisible="false">
+            <BarChart fx:id="barChart" horizontalGridLinesVisible="false" layoutX="67.0" layoutY="304.0" prefHeight="230.0" prefWidth="368.0" title="Expenses" verticalGridLinesVisible="false">
               <xAxis>
-                <CategoryAxis label="Days" prefWidth="472.0" tickLabelGap="0.0" tickLength="2.0" fx:id="xAxis" />
+                <CategoryAxis label="Category" prefWidth="472.0" tickLabelGap="0.0" tickLength="2.0" fx:id="xAxis" />
               </xAxis>
               <yAxis>
                 <NumberAxis fx:id="yAxis" label="Dollars" minorTickCount="0" minorTickVisible="false" prefHeight="133.0" prefWidth="38.0" tickLength="1.0" />
@@ -210,6 +182,18 @@
                   <Image url="@dashboardIcons/download.png" />
                </image>
             </ImageView>
+            <Pane fx:id="recentExpensesPane" layoutX="451.0" layoutY="61.0" prefHeight="473.0" prefWidth="141.0">
+               <children>
+                  <VBox fx:id="recentExpensesContainer" layoutX="17.0" layoutY="30.0" prefHeight="414.0" prefWidth="109.0" />
+                  <Text layoutX="52.0" layoutY="-97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recent Expenses" />
+                  <Text layoutX="16.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recent Expenses">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Text>
+                  <Line fx:id="recentExpensesLine" endX="9.04296875" endY="0.808990478515625" layoutX="116.0" layoutY="28.0" startX="-100.0" />
+               </children>
+            </Pane>
          </children></Pane>
    </children>
 </AnchorPane>
