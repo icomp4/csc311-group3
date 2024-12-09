@@ -199,7 +199,7 @@
             </Text>
             <BarChart fx:id="barChart" horizontalGridLinesVisible="false" layoutX="51.0" layoutY="308.0" prefHeight="230.0" prefWidth="368.0" title="Expenses" verticalGridLinesVisible="false">
               <xAxis>
-                <CategoryAxis label="Days" prefWidth="472.0" tickLabelGap="0.0" tickLength="2.0" fx:id="xAxis" />
+                <CategoryAxis label="Category" prefWidth="472.0" tickLabelGap="0.0" tickLength="2.0" fx:id="xAxis" />
               </xAxis>
               <yAxis>
                 <NumberAxis fx:id="yAxis" label="Dollars" minorTickCount="0" minorTickVisible="false" prefHeight="133.0" prefWidth="38.0" tickLength="1.0" />

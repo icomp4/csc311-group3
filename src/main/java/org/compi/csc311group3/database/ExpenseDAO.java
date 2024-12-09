@@ -6,19 +6,18 @@ import org.compi.csc311group3.service.ExpensesWithTotal;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.sql.Timestamp;
+import java.util.Map;
 
 public class ExpenseDAO {
     private final DbConnection dbConnection = new DbConnection();
 
-    public static double totalExpenseAmount; //variable to store the sum of all expenses.  This piece of data is needed for dashboard page.
 
     public List<Expense> getAllExpenses() throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM expenses";
         List<Expense> expenses = new ArrayList<>();
-
-        totalExpenseAmount = 0; //resets expenses to zero before looping through and recalculating.
 
         try(Connection connection = dbConnection.getConnection();
             Statement stmt = connection.createStatement();
@@ -32,9 +31,6 @@ public class ExpenseDAO {
                         rs.getDouble("amount")
                 );
                 expenses.add(expense);
-
-                totalExpenseAmount += expense.getAmount(); //add the amount of this expense to the totalAmount
-
             }
         }
         return expenses;
@@ -173,10 +169,17 @@ public class ExpenseDAO {
     }
 
 
+    /*
+    * This method loops through all expenses in the database.
+    * It puts all expenses in a list and calculates the total amount of expenses and stores it in a variable
+    *
+    * @return an ExpenseWithTotal object which contains list of all expenses and a variable with expense total amount
+    * */
     public ExpensesWithTotal getAllExpensesInAnObject() throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM expenses";
         List<Expense> expenses = new ArrayList<>();
         double totalExpenseAmount = 0; //resets expenses to zero before looping through and recalculating.
+        Map<LocalDate, Double> dailyExpenses = new HashMap<>(); //to store daily total expenses
 
         try(Connection connection = dbConnection.getConnection();
             Statement stmt = connection.createStatement();
@@ -193,9 +196,15 @@ public class ExpenseDAO {
 
                 totalExpenseAmount += expense.getAmount(); //add the amount of this expense to the totalAmount
 
+                LocalDate expenseDate = expense.getDate_time().toLocalDate(); //get the date of the expense, not including the time part
+
+                dailyExpenses.put(expenseDate, dailyExpenses.getOrDefault(expenseDate, 0.0) + expense.getAmount()); //update the daily total in the map
+
+
+
             }
         }
-        return new ExpensesWithTotal(expenses, totalExpenseAmount);
+        return new ExpensesWithTotal(expenses, totalExpenseAmount, dailyExpenses);
     }
 
 

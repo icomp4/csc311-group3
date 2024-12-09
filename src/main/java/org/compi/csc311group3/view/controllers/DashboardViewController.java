@@ -11,6 +11,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.compi.csc311group3.Expense;
 import org.compi.csc311group3.database.ExpenseDAO;
 import org.compi.csc311group3.model.Deposit;
 import org.compi.csc311group3.service.DepositService;
@@ -19,8 +20,7 @@ import org.compi.csc311group3.service.ExpensesWithTotal;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
-import static org.compi.csc311group3.database.ExpenseDAO.totalExpenseAmount; //total expenses from ExpenseDAO;
+import java.util.Map;
 
 import static org.compi.csc311group3.HelloApplication.ChangeScreen;
 
@@ -74,6 +74,8 @@ public class DashboardViewController implements Runnable{
 
         ExpensesWithTotal expensesBundle = expenseDAO.getAllExpensesInAnObject();
         double totalExpenses = expensesBundle.getTotalExpenseAmount();
+        Map dailyExpenses = expensesBundle.getDailyExpenses(); //contains users daily expenses for past week
+        System.out.println("daily expenses" + dailyExpenses.toString());
 
         String balanceFormated = currencyController.convertCurrencyWithFormat(balance);
         String expensesFormated = currencyController.convertCurrencyWithFormat(totalExpenses);
@@ -95,7 +97,7 @@ public class DashboardViewController implements Runnable{
 
         /***** Bar chart code - start *****/
 
-        barChart.legendVisibleProperty().setValue(false); //hides legend on bar chart
+        /*barChart.legendVisibleProperty().setValue(false); //hides legend on bar chart
 
         yAxis.setLabel(currentCurrency); //sets the y-axis label to the current currency
 
@@ -122,8 +124,31 @@ public class DashboardViewController implements Runnable{
 
 
         barChart.getData().addAll(set1);//adds data to barChart
+
+
+        /***** Bar chart code - end *****/
+
         depositService = new DepositService();
         calculateBalances();
+
+        /***** Bar chart code - start *****/
+
+        barChart.legendVisibleProperty().setValue(false);
+
+        List<Expense> expensesList = expensesBundle.getExpenses(); //list of expenses
+        yAxis.setLabel(currentCurrency); //set the y-axis to the current currency
+        barChart.getData().clear(); //remove any existing data from the bar chart
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName(currentCurrency);
+
+        //loop through the expenses and add each one to the chart
+        for(Expense expense : expensesList) {
+            String description = expense.getCategory(); //user expense category
+            double amount = expense.getAmount();
+            series.getData().add(new XYChart.Data<>(description, amount));
+        }
+
+        barChart.getData().add(series);
 
         /***** Bar chart code - end *****/
 
