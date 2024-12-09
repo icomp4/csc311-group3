@@ -11,16 +11,33 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * DepositService class provides methods to add and retrieve deposits from the database.
+ * This class is used to interact with the deposits table in the database.
+ */
 public class DepositService {
+
+    // singleton instance of the UserService class
     private static UserService instance;
+
+    // the currently logged-in user
     private final User currentUser;
+
+    // singleton instance of the DbConnection class
     private final DbConnection dbConnection = new DbConnection();
 
+    /**
+     * Constructor to initialize the currently logged-in user.
+     */
     public DepositService() {
         currentUser = UserService.getInstance().getCurrentUser();
     }
 
+    /**
+     * Method to add a deposit to the database.
+     * @param account the account type to which the deposit is made
+     * @param amount the amount of the deposit
+     */
     public void addDeposit(String account, double amount) {
         String sql = "INSERT INTO deposits (user_id, account_type, amount) VALUES (?, ?, ?)";
         try (Connection conn = dbConnection.getConnection();
@@ -35,6 +52,10 @@ public class DepositService {
         }
     }
 
+    /**
+     * Method to get all deposits made by the currently logged-in user.
+     * @return a list of deposits made by the user
+     */
     public List<Deposit> getDeposits() {
         String query = "SELECT * FROM deposits WHERE user_id = ?";
         List<Deposit> deposits = new ArrayList<>();
@@ -46,7 +67,8 @@ public class DepositService {
                     Deposit deposit = new Deposit(
                             rs.getInt("id"),
                             rs.getString("account_type"),
-                            rs.getDouble("amount")
+                            rs.getDouble("amount"),
+                            rs.getTimestamp("date_time")
                     );
                     deposits.add(deposit);
                 }
@@ -56,5 +78,4 @@ public class DepositService {
         }
         return deposits;
     }
-
 }
