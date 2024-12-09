@@ -16,13 +16,6 @@
 - Todos are posted on the project, from where any member can claim any todo
 - We all work on both front and backend, which allows for every member to be involved on both parts of the stack
 
-# What we need to do:
-- Finish backend logic for deposits, and connect it to the frontend
-- Finish backend logic for the dashboard
-- Create the analytics page, and associated backend functionality
-- Finalize the styling and name of the project
-- Overall bug fixes, finishing touches
-
 # Design Resources:
 
 ### Icons
