@@ -385,8 +385,7 @@ public class AnalyticsController {
 
     /**
      * Displays a table view containing the provided expense data in the report display pane
-     * @param expenses A list of the expense data to be displayed in the table
-     *                 Each entry is a map with keys
+     * @param expenses A list of the expense data to be displayed in the tabLE. Each entry is a map with keys
      * @param totalExpense The total amount of expenses shown in a summary row
      */
     private void displayExpensesInTable(List<Map<String, Object>> expenses, double totalExpense){
@@ -438,6 +437,11 @@ public class AnalyticsController {
         reportDisplayPane.getChildren().add(tableContainer);
     }
 
+    /**
+     * Displays a table view comparing expenses for two time periods
+     * Each periods expenses are shown followed by a summary/total
+     * @param combinedData A list of expense data including rows for both periods, summaries, and differences
+     */
     private void displayComparisonTable(List<Map<String, Object>> combinedData) {
 
         reportDisplayPane.getChildren().clear();
@@ -593,6 +597,10 @@ public class AnalyticsController {
 
     }
 
+    /**
+     * Sets up action listeners for report generation buttons
+     * Each button triggers a specific report generation method and enables thr print button after generating the report
+     */
     private void setupReportGeneratedListeners(){
         totalExpenseButton.setOnAction(event -> {
             calculateTotalExpense();
@@ -615,6 +623,10 @@ public class AnalyticsController {
         });
     }
 
+    /**
+     * Enables the print button
+     * Called after a report is successfully generated to allow printing
+     */
     private void enablePrintButton(){
         printButton.setDisable(false);
     }
