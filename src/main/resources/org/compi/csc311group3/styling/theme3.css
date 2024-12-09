@@ -105,3 +105,7 @@
     -fx-text-fill: black;
     -fx-font-size: 14px;
 }
+
+#recentExpensesLine {
+    -fx-stroke: grey;
+}

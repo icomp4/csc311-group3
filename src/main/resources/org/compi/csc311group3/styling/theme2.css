@@ -449,9 +449,9 @@ Circle {
     -fx-prompt-text-fill: #8E8E93;
 }
 
-
-
-
+#recentExpensesLine {
+    -fx-stroke: white;
+}
 
 
 

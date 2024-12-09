@@ -94,3 +94,7 @@
     -fx-spacing: 15px; /* Space between cards */
     -fx-padding: 10px;
 }
+
+#recentExpensesLine {
+    -fx-stroke: grey;
+}

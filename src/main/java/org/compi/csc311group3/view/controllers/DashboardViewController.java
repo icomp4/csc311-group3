@@ -9,6 +9,8 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.compi.csc311group3.Expense;
@@ -19,6 +21,8 @@ import org.compi.csc311group3.service.ExpensesWithTotal;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -59,8 +63,13 @@ public class DashboardViewController implements Runnable{
     @FXML
     private NumberAxis yAxis;
 
+    @FXML
+    private VBox recentExpensesContainer;
+
 
     public void initialize() throws SQLException, ClassNotFoundException {
+
+        addRecentExpensesToDashboard(); //add recent expenses to the recentExpensesContainer
 
         //assign data from DB to these variables
         double balance = 3000;
@@ -257,4 +266,49 @@ public class DashboardViewController implements Runnable{
         totalBalanceText.setText(currencyController.convertCurrencyWithFormat(totalBalance)); //display balance with proper currency unit
         savingsText.setText(currencyController.convertCurrencyWithFormat(savings)); //display savings with proper currency unit
     }
+
+
+    private void addRecentExpensesToDashboard() throws SQLException, ClassNotFoundException {
+
+        ExpensesWithTotal expenseBundle = expenseDAO.getAllExpensesInAnObject();
+        List<Expense> expenseList = expenseBundle.getExpenses(); //gets list of all expenses
+
+        recentExpensesContainer.getChildren().clear(); //clear container before adding new things
+
+        recentExpensesContainer.setSpacing(5); //spacing between items in the container
+
+
+        expenseList.sort(Comparator.comparing(Expense::getDate_time).reversed()); //sort expenseList based on date
+
+        //loop through the top 5 recent expenses or fewer if there are less than 5
+        int count = Math.min(6, expenseList.size());  //ensure we don't exceed the list size
+        for (int i = 0; i < count; i++) {
+            Expense expense = expenseList.get(i);
+
+            //create a VBox for each expense
+            VBox expenseVBox = new VBox(1); // 1 is the spacing between elements inside the VBox
+
+            //dateTimeFormatter to format the date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+            //create labels to display expense details
+            Label descriptionLabel = new Label(String.valueOf(expense.getDescription()));
+            Label dateLabel = new Label(expense.getDate_time().toLocalDate().format(formatter)); //date formatted as MM/dd/yyyy
+            Label amountLabel = new Label(currencyController.convertCurrencyWithFormat(expense.getAmount()));
+
+            //styles for labels
+            descriptionLabel.setStyle("-fx-font-weight: bold;");
+            amountLabel.setStyle("-fx-text-fill: red;");
+
+            //add the labels to the VBox
+            expenseVBox.getChildren().addAll(dateLabel, descriptionLabel, amountLabel); //order matters
+
+            //add some style for the expenseVBox
+            expenseVBox.setStyle("-fx-background-color: transparent; -fx-padding: 5 0 5 0; -fx-border-color: transparent transparent #c5c5c5 transparent; -fx-border-radius: 0px; -fx-background-radius: 0px");
+            //add the VBox to the container
+            recentExpensesContainer.getChildren().add(expenseVBox);
+        }
+
+    }
+
 }
